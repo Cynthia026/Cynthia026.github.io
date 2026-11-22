@@ -61,6 +61,13 @@ export interface ProjectMetric {
   label: string;
 }
 
+/** Globo numerado sobre la captura, como las referencias de un plano. x e y en % de la imagen. */
+export interface Callout {
+  label: string;
+  x: number;
+  y: number;
+}
+
 export interface Project {
   /** Identificador único, se usa como `key` y ancla (#slug). */
   slug: string;
@@ -78,6 +85,10 @@ export interface Project {
   metrics?: ProjectMetric[];
   /** Captura dentro de /public, sin barra inicial (p. ej. `projects/tienda.webp`). Si falta, se dibuja un esquema. */
   image?: string;
+  /** Referencias numeradas sobre la captura (solo se muestran en la portada). */
+  callouts?: Callout[];
+  /** Capas del sistema, de la interfaz a los datos; se dibuja como diagrama. */
+  architecture?: { name: string; detail: string }[];
   demoUrl?: string;
   repoUrl?: string;
   /** Otros repositorios del mismo proyecto (backend, versiones previas). */

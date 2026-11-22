@@ -31,6 +31,7 @@ export function ProjectList({ projects }: { projects: readonly Project[] }) {
               key={project.slug}
               project={project}
               featured={index === 0 || (index === visible.length - 1 && lastIsAlone)}
+              figure={`2.${index + 1}`}
             />
           ))}
         </div>

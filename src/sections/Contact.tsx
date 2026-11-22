@@ -47,6 +47,7 @@ export function Contact() {
   return (
     <Section
       id="contacto"
+      number={6}
       title="Contacto"
       intro="Si buscas a alguien para tu equipo de frontend o tienes un proyecto en mente, escríbeme."
     >

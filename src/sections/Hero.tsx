@@ -5,22 +5,28 @@ import { DownloadIcon } from '@/components/ui/icons';
 import { asset } from '@/lib/asset';
 import styles from './Hero.module.css';
 
+/** Datos del cajetín: el recuadro de identificación de un plano técnico. */
+const TITLE_BLOCK = [
+  { label: 'Autora', value: profile.name },
+  { label: 'Especialidad', value: profile.role.replace('Desarrolladora ', '') },
+  { label: 'Formación', value: 'Ing. en Sistemas Computacionales, TecNM Pachuca' },
+  { label: 'Ubicación', value: profile.location.replace(', México', '') },
+  { label: 'Estado', value: 'Disponible para prácticas' },
+];
+
 export function Hero() {
   const [first, ...rest] = profile.name.split(' ');
-  const featured = projects.find((p) => p.image) ?? projects[0];
+  const featured = projects.find((p) => p.image && p.callouts) ?? projects[0];
 
   return (
-    <section id="inicio" aria-labelledby="hero-title" className={styles.hero}>
+    <section id="inicio" aria-labelledby="hero-title" className={`grid-paper ${styles.hero}`}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.text}>
-          <p className={styles.hello}>Hola, soy</p>
+          <p className={styles.kicker}>Portafolio técnico, revisión 2026</p>
           <h1 id="hero-title" className={styles.name}>
-            <span>{first}</span> <span className={styles.last}>{rest.join(' ')}</span>
+            {first} <span className={styles.last}>{rest.join(' ')}</span>
           </h1>
-          <p className={styles.role}>
-            <span className={styles.dot} aria-hidden="true" />
-            {profile.role}
-          </p>
+          <p className={styles.role}>{profile.role}</p>
           <p className={styles.headline}>{profile.headline}</p>
 
           <div className={styles.ctas}>
@@ -37,13 +43,8 @@ export function Hero() {
         </div>
 
         {featured?.image && (
-          <figure className={styles.visual}>
-            <a href={`#${featured.slug}`} className={styles.frame}>
-              <span className={styles.bar} aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </span>
+          <figure className={styles.figure}>
+            <a href={`#${featured.slug}`} className={styles.drawing}>
               <img
                 src={asset(featured.image)}
                 alt={`Captura de ${featured.title}`}
@@ -51,14 +52,43 @@ export function Hero() {
                 height={500}
                 fetchPriority="high"
               />
+              {featured.callouts?.map((callout, i) => (
+                <span
+                  key={callout.label}
+                  className={styles.balloon}
+                  style={{ left: `${callout.x}%`, top: `${callout.y}%` }}
+                  aria-hidden="true"
+                >
+                  {i + 1}
+                </span>
+              ))}
             </a>
             <figcaption className={styles.caption}>
-              <span className={styles.captionLabel}>Proyecto destacado</span>
-              <span className={styles.captionTitle}>{featured.title.split(':')[0]}</span>
-              <span className={styles.captionText}>{featured.summary}</span>
+              <p className={styles.figTitle}>
+                <span className={styles.figNumber}>Fig. 1</span>
+                {featured.title.split(':')[0]}
+              </p>
+              {featured.callouts && (
+                <ol className={styles.legend}>
+                  {featured.callouts.map((callout) => (
+                    <li key={callout.label}>{callout.label}</li>
+                  ))}
+                </ol>
+              )}
             </figcaption>
           </figure>
         )}
+      </div>
+
+      <div className="container">
+        <dl className={styles.titleBlock}>
+          {TITLE_BLOCK.map((cell) => (
+            <div key={cell.label} className={styles.cell}>
+              <dt>{cell.label}</dt>
+              <dd>{cell.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

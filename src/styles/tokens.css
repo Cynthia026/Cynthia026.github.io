@@ -1,41 +1,40 @@
 /* ==========================================================================
-   Design tokens — única fuente de verdad para color, tipografía y espacio.
+   Design tokens — estética de plano técnico.
+   Claro: papel de dibujo con retícula azul. Oscuro: plano azul (blueprint).
    ========================================================================== */
 :root {
-  /* Paleta (claro) */
-  --color-bg: #f4f6fa;
+  --color-bg: #f4f6f9;
   --color-surface: #ffffff;
-  --color-surface-2: #eef1f7;
-  --color-ink: #10182f;
-  --color-muted: #586179;
-  --color-line: #dfe4ed;
-  --color-line-strong: #c5ccda;
-  --color-accent: #3047d9;
-  --color-accent-hover: #2337b8;
-  --color-accent-soft: #e6e9fd;
+  --color-surface-2: #edf1f6;
+  --color-ink: #0e1a2f;
+  --color-muted: #526079;
+  --color-line: #d5dce6;
+  --color-line-strong: #a9b5c8;
+  /* Retícula de fondo: líneas menores y mayores del papel milimétrico */
+  --color-grid: #e3e8f0;
+  --color-grid-major: #d3dbe7;
+  --color-accent: #1f4fd1;
+  --color-accent-hover: #173eaa;
+  --color-accent-soft: #e4ebfc;
   --color-accent-ink: #ffffff;
-  /* Acento secundario: el amarillo de la excavadora IoT */
-  --color-amber: #b7790a;
-  --color-amber-soft: #fdf1d6;
-  --color-green: #1f8a4c;
-  --color-green-soft: #ddf3e6;
+  /* Color de anotación (cotas y llamadas), como el rojo de revisión de un plano */
+  --color-note: #c2410c;
+  --color-note-soft: #fdeee6;
+  --color-green: #1d7a45;
+  --color-green-soft: #dcf1e5;
 
-  --shadow-card: 0 1px 2px rgb(16 24 47 / 0.04), 0 12px 32px -18px rgb(16 24 47 / 0.18);
-  --shadow-lift: 0 2px 4px rgb(16 24 47 / 0.06), 0 24px 48px -24px rgb(16 24 47 / 0.28);
-
-  /* Tipografía */
-  --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
-  --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  /* Tipografía: familia IBM Plex, de origen técnico */
+  --font-sans: 'IBM Plex Sans Variable', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
   /* Escala modular 1.25 — fluida entre móvil y escritorio */
   --step--2: clamp(0.72rem, 0.7rem + 0.08vw, 0.78rem);
   --step--1: clamp(0.83rem, 0.8rem + 0.1vw, 0.88rem);
-  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.08rem);
-  --step-1: clamp(1.15rem, 1.08rem + 0.3vw, 1.3rem);
-  --step-2: clamp(1.4rem, 1.28rem + 0.55vw, 1.75rem);
-  --step-3: clamp(1.9rem, 1.6rem + 1.3vw, 2.75rem);
-  --step-5: clamp(2.9rem, 1.9rem + 4.2vw, 5.4rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.06rem);
+  --step-1: clamp(1.15rem, 1.08rem + 0.3vw, 1.28rem);
+  --step-2: clamp(1.4rem, 1.28rem + 0.55vw, 1.7rem);
+  --step-3: clamp(1.8rem, 1.55rem + 1.1vw, 2.5rem);
+  --step-5: clamp(2.7rem, 1.8rem + 4vw, 5rem);
 
   /* Espaciado (múltiplos de 4px) */
   --space-1: 0.25rem;
@@ -52,57 +51,56 @@
   /* Layout */
   --container: 74rem;
   --gutter: clamp(1rem, 4vw, 2.5rem);
-  --measure: 62ch;
-  --header-h: 4.25rem;
-  --radius-s: 6px;
-  --radius-m: 12px;
-  --radius-l: 18px;
+  --measure: 64ch;
+  --header-h: 4rem;
+  --radius-s: 2px;
+  --radius-m: 4px;
 
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
   color-scheme: light;
 }
 
-/* Tema oscuro: por preferencia del sistema, salvo que el usuario elija claro */
+/* Plano azul */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --color-bg: #0c1121;
-    --color-surface: #131a2e;
-    --color-surface-2: #192139;
-    --color-ink: #e7eaf3;
-    --color-muted: #9ca5bf;
-    --color-line: #242c46;
-    --color-line-strong: #333d5c;
-    --color-accent: #8c9cff;
-    --color-accent-hover: #a9b5ff;
-    --color-accent-soft: rgb(140 156 255 / 0.14);
-    --color-accent-ink: #0c1121;
-    --color-amber: #f3b740;
-    --color-amber-soft: rgb(243 183 64 / 0.14);
-    --color-green: #5fd08f;
-    --color-green-soft: rgb(95 208 143 / 0.14);
-    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -18px rgb(0 0 0 / 0.6);
-    --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.3), 0 24px 48px -24px rgb(0 0 0 / 0.7);
+    --color-bg: #0a1630;
+    --color-surface: #0e1d3d;
+    --color-surface-2: #132650;
+    --color-ink: #e6edf8;
+    --color-muted: #93a3c2;
+    --color-line: #22375f;
+    --color-line-strong: #36538a;
+    --color-grid: #102349;
+    --color-grid-major: #163063;
+    --color-accent: #82a8ff;
+    --color-accent-hover: #a7c1ff;
+    --color-accent-soft: rgb(130 168 255 / 0.14);
+    --color-accent-ink: #0a1630;
+    --color-note: #ffb35c;
+    --color-note-soft: rgb(255 179 92 / 0.14);
+    --color-green: #6fd39b;
+    --color-green-soft: rgb(111 211 155 / 0.14);
     color-scheme: dark;
   }
 }
 
 :root[data-theme='dark'] {
-  --color-bg: #0c1121;
-  --color-surface: #131a2e;
-  --color-surface-2: #192139;
-  --color-ink: #e7eaf3;
-  --color-muted: #9ca5bf;
-  --color-line: #242c46;
-  --color-line-strong: #333d5c;
-  --color-accent: #8c9cff;
-  --color-accent-hover: #a9b5ff;
-  --color-accent-soft: rgb(140 156 255 / 0.14);
-  --color-accent-ink: #0c1121;
-  --color-amber: #f3b740;
-  --color-amber-soft: rgb(243 183 64 / 0.14);
-  --color-green: #5fd08f;
-  --color-green-soft: rgb(95 208 143 / 0.14);
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -18px rgb(0 0 0 / 0.6);
-  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.3), 0 24px 48px -24px rgb(0 0 0 / 0.7);
+  --color-bg: #0a1630;
+  --color-surface: #0e1d3d;
+  --color-surface-2: #132650;
+  --color-ink: #e6edf8;
+  --color-muted: #93a3c2;
+  --color-line: #22375f;
+  --color-line-strong: #36538a;
+  --color-grid: #102349;
+  --color-grid-major: #163063;
+  --color-accent: #82a8ff;
+  --color-accent-hover: #a7c1ff;
+  --color-accent-soft: rgb(130 168 255 / 0.14);
+  --color-accent-ink: #0a1630;
+  --color-note: #ffb35c;
+  --color-note-soft: rgb(255 179 92 / 0.14);
+  --color-green: #6fd39b;
+  --color-green-soft: rgb(111 211 155 / 0.14);
   color-scheme: dark;
 }

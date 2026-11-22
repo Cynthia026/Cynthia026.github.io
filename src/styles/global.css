@@ -1,6 +1,7 @@
-@import '@fontsource-variable/bricolage-grotesque/wdth.css';
-@import '@fontsource-variable/instrument-sans';
-@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource-variable/ibm-plex-sans/wdth.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/600.css';
 @import './tokens.css';
 @import './reset.css';
 
@@ -23,10 +24,9 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--font-display);
-  line-height: 1.12;
-  font-weight: 650;
-  letter-spacing: -0.015em;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
@@ -39,7 +39,6 @@ a {
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
-  border-radius: 2px;
 }
 
 ::selection {
@@ -52,12 +51,27 @@ a {
   margin-inline: auto;
 }
 
-/* Tarjeta base reutilizable */
+/* Papel milimétrico: líneas menores cada 8px y mayores cada 40px */
+.grid-paper {
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(var(--color-grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-major) 1px, transparent 1px),
+    linear-gradient(var(--color-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+  background-size:
+    40px 40px,
+    40px 40px,
+    8px 8px,
+    8px 8px;
+  background-position: -1px -1px;
+}
+
+/* Panel con borde fino y esquinas rectas, sin sombra */
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-l);
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-m);
 }
 
 .visually-hidden {

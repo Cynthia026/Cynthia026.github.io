@@ -6,6 +6,7 @@ export function Projects() {
   return (
     <Section
       id="proyectos"
+      number={2}
       title="Proyectos destacados"
       intro="Cada proyecto muestra el reto de origen, las decisiones que tomé y el resultado. Filtra por tecnología para ver dónde la he aplicado."
     >

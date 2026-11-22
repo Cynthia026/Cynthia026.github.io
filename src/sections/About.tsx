@@ -1,62 +1,91 @@
-import { aboutFacts, coreStack, profile } from '@/content';
+import { aboutFacts, coreStack, profile, projects } from '@/content';
 import { Section } from '@/components/layout/Section';
 import { asset } from '@/lib/asset';
 import styles from './About.module.css';
 
-function initials(name: string): string {
-  const [first = '', second = ''] = name.split(' ');
-  return `${first[0] ?? ''}${second[0] ?? ''}`;
+function countProjects(matches: readonly string[]): number {
+  return projects.filter((p) => p.stack.some((tech) => matches.includes(tech))).length;
 }
 
 export function About() {
   return (
     <Section
       id="sobre-mi"
-      title="Sobre mí"
-      intro="Quién soy, con qué herramientas trabajo y dónde estoy formándome."
+      number={1}
+      title="Perfil"
+      intro="Quién soy, dónde me formo y con qué componentes construyo mis proyectos."
     >
-      <div className={styles.bento}>
-        <article className={`card ${styles.profile}`}>
-          {profile.photo ? (
+      <div className={styles.layout}>
+        <div className={styles.profile}>
+          {profile.photo && (
             <img
               src={asset(profile.photo)}
               alt={`Foto de ${profile.name}`}
-              className={styles.avatar}
-              width={96}
-              height={96}
+              className={styles.photo}
+              width={160}
+              height={160}
             />
-          ) : (
-            <span className={`${styles.avatar} ${styles.initials}`} aria-hidden="true">
-              {initials(profile.name)}
-            </span>
           )}
-          <div className={styles.profileText}>
-            <h3 className={styles.profileName}>{profile.name}</h3>
-            <p className={styles.profileRole}>{profile.role}</p>
-          </div>
           <p className={styles.summary}>{profile.summary}</p>
           <p className={styles.status}>
             <span className={styles.statusDot} aria-hidden="true" />
             {profile.availability}
           </p>
-        </article>
+        </div>
 
-        <article className={`card ${styles.stack}`}>
-          <h3 className={styles.cardLabel}>Stack principal</h3>
-          <ul role="list" className={styles.stackGrid}>
-            {coreStack.map((tech) => (
-              <li key={tech}>{tech}</li>
+        <div className={styles.sheet}>
+          <h3 className={styles.tableTitle}>Ficha técnica</h3>
+          <dl className={styles.facts}>
+            {aboutFacts.map((fact) => (
+              <div key={fact.label} className={styles.factRow}>
+                <dt>{fact.label}</dt>
+                <dd>
+                  <span className={styles.factValue}>{fact.value}</span>
+                  {fact.detail && <span className={styles.factDetail}>{fact.detail}</span>}
+                </dd>
+              </div>
             ))}
-          </ul>
-        </article>
+          </dl>
+        </div>
+      </div>
 
-        {aboutFacts.map((fact) => (
-          <article key={fact.label} className={`card ${styles.fact}`}>
-            <h3 className={styles.cardLabel}>{fact.label}</h3>
-            <p className={styles.factValue}>{fact.value}</p>
-            {fact.detail && <p className={styles.factDetail}>{fact.detail}</p>}
-          </article>
-        ))}
+      <div className={styles.bom}>
+        <h3 className={styles.tableTitle}>Lista de componentes</h3>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th scope="col">Componente</th>
+              <th scope="col">Tipo</th>
+              <th scope="col" className={styles.num}>
+                Proyectos que lo usan
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {coreStack.map((item) => {
+              const count = countProjects(item.matches);
+              return (
+                <tr key={item.name}>
+                  <th scope="row">{item.name}</th>
+                  <td>{item.kind}</td>
+                  <td className={styles.num}>
+                    <div className={styles.meter}>
+                      <span className={styles.track} aria-hidden="true">
+                        <span
+                          className={styles.bar}
+                          style={{ inlineSize: `${(count / projects.length) * 100}%` }}
+                        />
+                      </span>
+                      <span className={styles.count}>
+                        {count} de {projects.length}
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </Section>
   );

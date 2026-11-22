@@ -6,8 +6,9 @@ import type { Theme } from '@/hooks/useTheme';
 import styles from './Header.module.css';
 
 const NAV_ITEMS = [
-  { id: 'sobre-mi', label: 'Sobre mí' },
+  { id: 'sobre-mi', label: 'Perfil' },
   { id: 'proyectos', label: 'Proyectos' },
+  { id: 'laboratorio', label: 'Laboratorio' },
   { id: 'trayectoria', label: 'Trayectoria' },
   { id: 'habilidades', label: 'Habilidades' },
   { id: 'contacto', label: 'Contacto' },
@@ -41,14 +42,14 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
 
         <nav aria-label="Secciones" className={styles.nav}>
           <ul role="list" className={styles.list}>
-            {NAV_ITEMS.map((item) => (
+            {NAV_ITEMS.map((item, index) => (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
                   className={styles.link}
                   aria-current={active === item.id ? 'location' : undefined}
                 >
-                  {item.label}
+                  <span className={styles.linkNumber}>{index + 1}.</span> {item.label}
                 </a>
               </li>
             ))}

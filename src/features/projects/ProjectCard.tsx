@@ -13,9 +13,11 @@ interface ProjectCardProps {
   project: Project;
   /** La tarjeta destacada ocupa todo el ancho con la imagen a un lado. */
   featured?: boolean;
+  /** Número de figura, p. ej. «2.1». */
+  figure: string;
 }
 
-export function ProjectCard({ project, featured = false }: ProjectCardProps) {
+export function ProjectCard({ project, featured = false, figure }: ProjectCardProps) {
   const [open, setOpen] = useState(false);
   const detailsId = useId();
   const titleId = `${project.slug}-title`;
@@ -40,6 +42,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
         ) : (
           <ProjectCover project={project} />
         )}
+        <span className={styles.figure}>Fig. {figure}</span>
       </div>
 
       <div className={styles.body}>
@@ -110,6 +113,20 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
               </dd>
             </div>
           </dl>
+
+          {project.architecture && (
+            <div>
+              <p className={styles.detailTitle}>Arquitectura</p>
+              <ol className={styles.architecture} aria-label={`Arquitectura de ${project.title}`}>
+                {project.architecture.map((layer) => (
+                  <li key={layer.name}>
+                    <strong>{layer.name}</strong>
+                    <span>{layer.detail}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
 
           {project.metrics && project.metrics.length > 0 && (
             <ul role="list" className={styles.metrics} aria-label="Resultados">

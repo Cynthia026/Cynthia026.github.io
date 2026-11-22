@@ -8,31 +8,27 @@ const KIND_CLASS: Record<ExperienceKind, string | undefined> = {
   Educación: styles.education,
   Proyecto: styles.project,
   Trabajo: styles.work,
-  Certificación: styles.certification,
+  Certificación: styles.work,
 };
 
 export function Experience() {
   return (
     <Section
       id="trayectoria"
+      number={4}
       title="Trayectoria"
       intro="Mi formación y cómo ha crecido mi trabajo, de lo más reciente a lo más antiguo."
     >
-      <ol role="list" className={styles.timeline}>
+      <ol role="list" className={styles.log}>
         {experience.map((item) => (
-          <li key={`${item.period}-${item.title}`} className={styles.item}>
-            <span className={styles.marker} aria-hidden="true" />
-            <article className={`card ${styles.card}`}>
-              <header className={styles.head}>
-                <p className={styles.place}>{item.place}</p>
-                <div className={styles.badges}>
-                  <span className={`${styles.kind} ${KIND_CLASS[item.kind] ?? ''}`}>
-                    {item.kind}
-                  </span>
-                  <span className={styles.period}>{item.period}</span>
-                </div>
-              </header>
+          <li key={`${item.period}-${item.title}`} className={styles.entry}>
+            <div className={styles.when}>
+              <span className={styles.period}>{item.period}</span>
+              <span className={`${styles.kind} ${KIND_CLASS[item.kind] ?? ''}`}>{item.kind}</span>
+            </div>
+            <div className={styles.what}>
               <h3 className={styles.title}>{item.title}</h3>
+              <p className={styles.place}>{item.place}</p>
               <p className={styles.description}>{item.description}</p>
               {item.tags && (
                 <ul role="list" className={styles.tags} aria-label="Tecnologías">
@@ -43,7 +39,7 @@ export function Experience() {
                   ))}
                 </ul>
               )}
-            </article>
+            </div>
           </li>
         ))}
       </ol>

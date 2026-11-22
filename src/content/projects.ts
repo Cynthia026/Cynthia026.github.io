@@ -38,6 +38,18 @@ export const projects: Project[] = [
       { value: '3', label: 'roles de usuario' },
     ],
     image: 'projects/vehiculo-iot.webp',
+    callouts: [
+      { label: 'Gemelo digital 3D con Three.js y modo VR con WebXR', x: 52, y: 46 },
+      { label: 'Control por voz, gestos de la mano y giroscopio', x: 13, y: 86 },
+      { label: 'Velocidad y estado en tiempo real por WebSockets', x: 87, y: 66 },
+      { label: 'Paro prioritario: «Detener» siempre gana', x: 87, y: 77 },
+    ],
+    architecture: [
+      { name: 'Navegador', detail: 'PWA en JavaScript, Three.js, WebXR, MediaPipe' },
+      { name: 'Comunicación', detail: 'REST con JWT y WebSockets por vehículo' },
+      { name: 'API', detail: 'FastAPI en AWS EC2, roles y validación de propiedad' },
+      { name: 'Datos', detail: 'MySQL en Amazon RDS con 21 procedimientos almacenados' },
+    ],
     demoUrl: 'https://cynthia026.github.io/vehiculo-iot-vr/',
     repoUrl: `${GH}/vehiculo-iot-vr-ia`,
     related: [

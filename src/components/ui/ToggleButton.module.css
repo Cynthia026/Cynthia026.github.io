@@ -4,7 +4,7 @@
   width: 2.5rem;
   height: 2.5rem;
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-m);
+  border-radius: var(--radius-s);
   background: var(--color-surface);
   cursor: pointer;
   transition: border-color 0.15s var(--ease-out);
