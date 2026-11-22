@@ -6,7 +6,6 @@ export function Projects() {
   return (
     <Section
       id="proyectos"
-      component="Projects"
       title="Proyectos destacados"
       intro="Cada proyecto muestra el reto de origen, las decisiones que tomé y el resultado. Filtra por tecnología para ver dónde la he aplicado."
     >

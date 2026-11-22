@@ -10,7 +10,6 @@ export function Contact() {
   return (
     <Section
       id="contacto"
-      component="Contact"
       title="Contacto"
       intro="Si buscas a alguien para tu equipo de frontend o tienes un proyecto en mente, escríbeme."
     >

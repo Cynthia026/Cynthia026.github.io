@@ -6,7 +6,7 @@ import styles from './Hero.module.css';
 export function Hero() {
   const [first, ...rest] = profile.name.split(' ');
   return (
-    <section id="inicio" aria-labelledby="hero-title" className={styles.hero} data-component="Hero">
+    <section id="inicio" aria-labelledby="hero-title" className={styles.hero}>
       <div className="container">
         <div className={styles.top}>
           <p className={styles.role}>

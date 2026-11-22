@@ -9,7 +9,6 @@ interface ToggleButtonProps {
   /** Muestra el texto junto al icono en pantallas anchas. */
   showLabel?: boolean;
   shortcut?: string;
-  tone?: 'default' | 'inspect';
 }
 
 /** Botón de dos estados accesible (aria-pressed). */
@@ -20,12 +19,11 @@ export function ToggleButton({
   icon,
   showLabel,
   shortcut,
-  tone = 'default',
 }: ToggleButtonProps) {
   return (
     <button
       type="button"
-      className={tone === 'inspect' ? `${styles.toggle} ${styles.inspect}` : styles.toggle}
+      className={styles.toggle}
       aria-pressed={pressed}
       onClick={onToggle}
       title={shortcut ? `${label} (tecla ${shortcut})` : label}

@@ -7,12 +7,7 @@ import styles from './ProjectRow.module.css';
 export function ProjectRow({ project }: { project: Project }) {
   const titleId = `${project.slug}-title`;
   return (
-    <article
-      id={project.slug}
-      aria-labelledby={titleId}
-      className={styles.row}
-      data-component="ProjectRow"
-    >
+    <article id={project.slug} aria-labelledby={titleId} className={styles.row}>
       <div className={styles.media}>
         {project.image ? (
           <img

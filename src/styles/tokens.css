@@ -11,13 +11,6 @@
   --color-accent: #2c47e0;
   --color-accent-ink: #ffffff;
 
-  /* Colores del modo inspección (inspirados en DevTools) */
-  --inspect-margin: rgb(246 178 107 / 0.18);
-  --inspect-content: rgb(111 168 220 / 0.14);
-  --inspect-line: #d9480f;
-  --inspect-label-bg: #1b2340;
-  --inspect-label-ink: #ffd8a8;
-
   /* Tipografía */
   --font-sans: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
@@ -62,9 +55,6 @@
     --color-line: #2c3454;
     --color-accent: #8fa0ff;
     --color-accent-ink: #11162a;
-    --inspect-line: #ffa94d;
-    --inspect-label-bg: #ffa94d;
-    --inspect-label-ink: #11162a;
     color-scheme: dark;
   }
 }
@@ -77,8 +67,5 @@
   --color-line: #2c3454;
   --color-accent: #8fa0ff;
   --color-accent-ink: #11162a;
-  --inspect-line: #ffa94d;
-  --inspect-label-bg: #ffa94d;
-  --inspect-label-ink: #11162a;
   color-scheme: dark;
 }

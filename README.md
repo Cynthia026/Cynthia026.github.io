@@ -41,10 +41,10 @@ src/
 ├── types/          Modelos TypeScript del contenido
 ├── styles/         tokens.css (diseño), reset.css, global.css
 ├── lib/            Utilidades puras sin React
-├── hooks/          useTheme, useInspectMode, useCopyToClipboard
+├── hooks/          useTheme, useCopyToClipboard
 ├── components/
 │   ├── layout/     Header, Footer, Section, SkipLink
-│   └── ui/         Button, Tag, ToggleButton, GridOverlay, iconos
+│   └── ui/         Button, Tag, ToggleButton, ContactList, iconos
 ├── features/
 │   └── projects/   Módulo autocontenido: lista, filtro, fila, lógica y tests
 ├── sections/       Secciones de la página (Hero, Projects, Experience, Skills, Contact)
@@ -60,10 +60,6 @@ src/
 - **CSS Modules:** estilos con alcance local, sin colisiones de clases.
 - **Accesibilidad:** HTML semántico, un solo `h1`, enlace para saltar al contenido, foco visible, `aria-pressed` en botones de estado, regiones `aria-live`, respeto a `prefers-reduced-motion` y `prefers-color-scheme`.
 - **Rendimiento:** fuentes autoalojadas (sin peticiones a terceros), imágenes con `loading="lazy"`, sin dependencias de UI.
-
-## Modo inspección
-
-Pulsa la tecla **i** (o «Ver estructura») para mostrar la retícula de 12 columnas y el nombre de cada componente sobre la página. Es una forma de que quien revise tu portafolio vea cómo está construido. Para que un componente nuevo aparezca, agrega `data-component="NombreDelComponente"` a su elemento raíz.
 
 ## Publicar en GitHub Pages
 

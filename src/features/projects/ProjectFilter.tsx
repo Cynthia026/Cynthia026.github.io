@@ -10,12 +10,7 @@ interface ProjectFilterProps {
 
 export function ProjectFilter({ options, value, onChange }: ProjectFilterProps) {
   return (
-    <div
-      role="group"
-      aria-label="Filtrar proyectos por tecnología"
-      className={styles.group}
-      data-component="ProjectFilter"
-    >
+    <div role="group" aria-label="Filtrar proyectos por tecnología" className={styles.group}>
       {[ALL, ...options].map((option) => (
         <button
           key={option}

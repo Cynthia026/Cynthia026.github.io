@@ -6,7 +6,6 @@ export function Lab() {
   return (
     <Section
       id="laboratorio"
-      component="Lab"
       title="Laboratorio"
       intro="Prácticas y experimentos más cortos donde aprendí las bases que uso en los proyectos de arriba."
     >

@@ -24,12 +24,4 @@ describe('App', () => {
     const expected = projects.filter((p) => p.stack.includes('Node.js')).length;
     expect(screen.getAllByRole('article')).toHaveLength(expected);
   });
-
-  it('activa el modo inspección con la tecla i', () => {
-    render(<App />);
-    fireEvent.keyDown(window, { key: 'i' });
-    expect(document.documentElement).toHaveAttribute('data-inspect');
-    fireEvent.keyDown(window, { key: 'Escape' });
-    expect(document.documentElement).not.toHaveAttribute('data-inspect');
-  });
 });

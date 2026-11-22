@@ -25,11 +25,6 @@
   border-color: var(--color-ink);
 }
 
-.inspect[aria-pressed='true'] {
-  border-color: var(--inspect-line);
-  background: var(--inspect-margin);
-}
-
 .icon {
   display: grid;
   place-items: center;

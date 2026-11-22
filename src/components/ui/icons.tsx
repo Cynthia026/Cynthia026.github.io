@@ -10,13 +10,6 @@ const common = {
   strokeLinejoin: 'round' as const,
 };
 
-export const InspectIcon = () => (
-  <svg {...common}>
-    <path d="M4 4h6M4 4v6M20 4h-6M20 4v6M4 20h6M4 20v-6M20 20h-6M20 20v-6" />
-    <path d="M9 12h6M12 9v6" />
-  </svg>
-);
-
 export const SunIcon = () => (
   <svg {...common}>
     <circle cx="12" cy="12" r="4" />

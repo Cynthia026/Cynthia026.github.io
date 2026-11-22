@@ -1,5 +1,5 @@
 import { profile } from '@/content';
-import { InspectIcon, MoonIcon, SunIcon } from '@/components/ui/icons';
+import { MoonIcon, SunIcon } from '@/components/ui/icons';
 import { ToggleButton } from '@/components/ui/ToggleButton';
 import type { Theme } from '@/hooks/useTheme';
 import styles from './Header.module.css';
@@ -15,13 +15,11 @@ const NAV_ITEMS = [
 interface HeaderProps {
   theme: Theme;
   onToggleTheme: () => void;
-  isInspecting: boolean;
-  onToggleInspect: () => void;
 }
 
-export function Header({ theme, onToggleTheme, isInspecting, onToggleInspect }: HeaderProps) {
+export function Header({ theme, onToggleTheme }: HeaderProps) {
   return (
-    <header className={styles.header} data-component="Header">
+    <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <a href="#inicio" className={styles.brand}>
           {profile.name}
@@ -38,15 +36,6 @@ export function Header({ theme, onToggleTheme, isInspecting, onToggleInspect }: 
         </nav>
 
         <div className={styles.actions}>
-          <ToggleButton
-            pressed={isInspecting}
-            onToggle={onToggleInspect}
-            label="Ver estructura"
-            icon={<InspectIcon />}
-            shortcut="i"
-            tone="inspect"
-            showLabel
-          />
           <ToggleButton
             pressed={theme === 'dark'}
             onToggle={onToggleTheme}

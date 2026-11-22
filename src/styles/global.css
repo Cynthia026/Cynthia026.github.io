@@ -64,28 +64,3 @@ a:hover {
   clip-path: inset(50%);
   white-space: nowrap;
 }
-
-/* ==========================================================================
-   Modo inspección: muestra la estructura de componentes de la página.
-   Se activa con <html data-inspect>. Cada componente declara data-component.
-   ========================================================================== */
-html[data-inspect] [data-component] {
-  position: relative;
-  outline: 1px dashed var(--inspect-line);
-  outline-offset: -1px;
-  background-image: linear-gradient(var(--inspect-content), var(--inspect-content));
-}
-
-html[data-inspect] [data-component]::before {
-  content: '<' attr(data-component) ' />';
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  z-index: 5;
-  padding: 1px 6px;
-  font: 500 11px/1.5 var(--font-mono);
-  color: var(--inspect-label-ink);
-  background: var(--inspect-label-bg);
-  border-end-end-radius: var(--radius-s);
-  pointer-events: none;
-}

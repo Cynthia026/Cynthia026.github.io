@@ -10,7 +10,7 @@ function shortUrl(href: string): string {
 /** Datos de contacto en una línea: correo, teléfono y perfiles. */
 export function ContactList() {
   return (
-    <address className={styles.address} data-component="ContactList">
+    <address className={styles.address}>
       <ul role="list" className={styles.list}>
         <li>
           <span className={styles.label}>Correo</span>

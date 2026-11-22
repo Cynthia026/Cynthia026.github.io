@@ -6,7 +6,6 @@ export function Skills() {
   return (
     <Section
       id="habilidades"
-      component="Skills"
       title="Habilidades y certificaciones"
       intro="Herramientas con las que están construidos los proyectos de arriba, más mi certificación e idiomas."
     >

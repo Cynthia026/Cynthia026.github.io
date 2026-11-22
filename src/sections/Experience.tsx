@@ -6,7 +6,6 @@ export function Experience() {
   return (
     <Section
       id="trayectoria"
-      component="Experience"
       title="Trayectoria"
       intro="Mi formación y cómo ha crecido mi trabajo, de lo más reciente a lo más antiguo."
     >

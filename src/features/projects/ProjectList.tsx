@@ -14,7 +14,7 @@ export function ProjectList({ projects }: { projects: readonly Project[] }) {
   const visible = useMemo(() => filterProjects(projects, filter), [projects, filter]);
 
   return (
-    <div data-component="ProjectList">
+    <div>
       <div className={styles.toolbar}>
         <ProjectFilter options={options} value={filter} onChange={setFilter} />
         <p className={styles.count} aria-live="polite">

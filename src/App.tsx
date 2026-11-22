@@ -1,8 +1,6 @@
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { SkipLink } from '@/components/layout/SkipLink';
-import { GridOverlay } from '@/components/ui/GridOverlay';
-import { useInspectMode } from '@/hooks/useInspectMode';
 import { useTheme } from '@/hooks/useTheme';
 import { Contact } from '@/sections/Contact';
 import { Experience } from '@/sections/Experience';
@@ -13,17 +11,11 @@ import { Skills } from '@/sections/Skills';
 
 export function App() {
   const { theme, toggleTheme } = useTheme();
-  const { isInspecting, toggleInspect } = useInspectMode();
 
   return (
     <>
       <SkipLink />
-      <Header
-        theme={theme}
-        onToggleTheme={toggleTheme}
-        isInspecting={isInspecting}
-        onToggleInspect={toggleInspect}
-      />
+      <Header theme={theme} onToggleTheme={toggleTheme} />
       <main id="contenido">
         <Hero />
         <Projects />
@@ -33,7 +25,6 @@ export function App() {
         <Contact />
       </main>
       <Footer />
-      <GridOverlay visible={isInspecting} />
     </>
   );
 }
