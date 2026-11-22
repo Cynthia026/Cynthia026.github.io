@@ -3,6 +3,7 @@ import { Tag } from '@/components/ui/Tag';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { ExternalIcon } from '@/components/ui/icons';
 import { asset } from '@/lib/asset';
+import { trackSpotlight } from '@/lib/spotlight';
 import type { ExperienceKind } from '@/types/content';
 import { useLanguage } from '@/i18n/useLanguage';
 import styles from './Experience.module.css';
@@ -33,7 +34,11 @@ export function Experience() {
     >
       <ol role="list" className={styles.log}>
         {c.experience.map((item) => (
-          <li key={`${item.period}-${item.title}`} className={styles.entry}>
+          <li
+            key={`${item.period}-${item.title}`}
+            className={`spotlight ${styles.entry}`}
+            onPointerMove={trackSpotlight}
+          >
             <div className={styles.when}>
               <span className={styles.period}>{item.period}</span>
               <span className={`${styles.kind} ${KIND_CLASS[item.kind] ?? ''}`}>

@@ -28,6 +28,22 @@
   color: var(--color-muted);
 }
 
+.item {
+  --spot-size: 140px;
+}
+
+.item svg {
+  transition:
+    color 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out);
+}
+
 .item:hover {
-  border-color: var(--color-line-strong);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.item:hover svg {
+  color: var(--color-accent);
+  transform: scale(1.15);
 }

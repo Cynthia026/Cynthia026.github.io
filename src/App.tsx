@@ -3,6 +3,7 @@ import { Header } from '@/components/layout/Header';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { useTheme } from '@/hooks/useTheme';
 import { LanguageProvider } from '@/i18n/LanguageProvider';
+import { CircuitBackground } from '@/components/effects/CircuitBackground';
 import { About } from '@/sections/About';
 import { Contact } from '@/sections/Contact';
 import { Experience } from '@/sections/Experience';
@@ -16,6 +17,7 @@ function Page() {
 
   return (
     <>
+      <CircuitBackground />
       <SkipLink />
       <Header theme={theme} onToggleTheme={toggleTheme} />
       <main id="contenido">

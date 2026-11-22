@@ -5,6 +5,8 @@
 }
 
 .group {
+  padding-inline: var(--space-2);
+  padding-block-end: var(--space-3);
   display: grid;
   align-content: start;
   gap: var(--space-3);
@@ -167,4 +169,12 @@
     width: auto;
     text-align: start !important;
   }
+}
+
+.table tbody tr {
+  transition: background-color 0.15s var(--ease-out);
+}
+
+.table tbody tr:hover {
+  background: var(--color-accent-soft);
 }

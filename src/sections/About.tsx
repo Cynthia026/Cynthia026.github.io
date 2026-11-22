@@ -2,6 +2,7 @@ import { Section } from '@/components/layout/Section';
 import { Icon } from '@/components/ui/Icon';
 import { useLanguage } from '@/i18n/useLanguage';
 import { asset } from '@/lib/asset';
+import { trackSpotlight } from '@/lib/spotlight';
 import type { Project } from '@/types/content';
 import styles from './About.module.css';
 
@@ -52,7 +53,11 @@ export function About() {
           <h3 className={styles.tableTitle}>{t.about.sheet}</h3>
           <dl className={styles.facts}>
             {aboutFacts.map((fact) => (
-              <div key={fact.label} className={styles.factRow}>
+              <div
+                key={fact.label}
+                className={`spotlight ${styles.factRow}`}
+                onPointerMove={trackSpotlight}
+              >
                 <dt>
                   <Icon name={fact.icon} size={15} />
                   {fact.label}

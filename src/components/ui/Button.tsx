@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 import { useRipple } from '@/hooks/useRipple';
+import { trackSpotlight } from '@/lib/spotlight';
 import styles from './Button.module.css';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
@@ -17,7 +18,13 @@ type NativeButtonProps = CommonProps & ButtonHTMLAttributes<HTMLButtonElement> &
 export function Button(props: LinkProps | NativeButtonProps) {
   const { variant = 'primary', size = 'default', className, children, ...rest } = props;
   const { onPointerDown, ripples } = useRipple(styles.ripple ?? '');
-  const classes = [styles.button, styles[variant], size === 'small' && styles.small, className]
+  const classes = [
+    'spotlight',
+    styles.button,
+    styles[variant],
+    size === 'small' && styles.small,
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 
@@ -34,6 +41,7 @@ export function Button(props: LinkProps | NativeButtonProps) {
       <a
         className={classes}
         onPointerDown={onPointerDown}
+        onPointerMove={trackSpotlight}
         {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
@@ -47,6 +55,7 @@ export function Button(props: LinkProps | NativeButtonProps) {
       type="button"
       className={classes}
       onPointerDown={onPointerDown}
+      onPointerMove={trackSpotlight}
       {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {content}

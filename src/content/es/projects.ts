@@ -129,6 +129,7 @@ export const projects: Project[] = [
     solution:
       'Separé el código en módulos de datos, renderizado y orquestación. Agregué filtros por género y año, cambio entre artistas y música, y mensajes claros cuando una petición falla. Está publicado en Vercel, que redirige las peticiones a las APIs en AWS.',
     stack: ['JavaScript', 'CSS', 'Vercel', 'AWS'],
+    image: 'projects/catalogo-musica.webp',
     repoUrl: `${GH}/Esc-Red-Api-Front-Vercel-AWS`,
   },
   {

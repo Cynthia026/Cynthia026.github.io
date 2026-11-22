@@ -1,10 +1,10 @@
-import { CircuitBackground } from '@/components/effects/CircuitBackground';
 import { Button } from '@/components/ui/Button';
 import { ContactList } from '@/components/ui/ContactList';
 import { DownloadIcon } from '@/components/ui/icons';
 import { Icon } from '@/components/ui/Icon';
 import { useLanguage } from '@/i18n/useLanguage';
 import { asset } from '@/lib/asset';
+import { trackSpotlight } from '@/lib/spotlight';
 import styles from './Hero.module.css';
 
 export function Hero() {
@@ -14,8 +14,7 @@ export function Hero() {
   const featured = projects.find((p) => p.image && p.callouts) ?? projects[0];
 
   return (
-    <section id="inicio" aria-labelledby="hero-title" className={`grid-paper ${styles.hero}`}>
-      <CircuitBackground />
+    <section id="inicio" aria-labelledby="hero-title" className={styles.hero}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.text}>
           <p className={styles.kicker}>{t.hero.kicker}</p>
@@ -82,7 +81,11 @@ export function Hero() {
       <div className="container">
         <dl className={styles.titleBlock}>
           {c.titleBlock.map((cell) => (
-            <div key={cell.label} className={styles.cell}>
+            <div
+              key={cell.label}
+              className={`spotlight ${styles.cell}`}
+              onPointerMove={trackSpotlight}
+            >
               <dt>
                 <Icon name={cell.icon} size={14} />
                 {cell.label}

@@ -3,6 +3,7 @@ import { ExternalIcon } from '@/components/ui/icons';
 import { Icon } from '@/components/ui/Icon';
 import { useLanguage } from '@/i18n/useLanguage';
 import { asset } from '@/lib/asset';
+import { trackSpotlight } from '@/lib/spotlight';
 import styles from './Skills.module.css';
 
 export function Skills() {
@@ -24,7 +25,11 @@ export function Skills() {
     >
       <div className={styles.grid}>
         {c.skills.map((group) => (
-          <article key={group.name} className={styles.group}>
+          <article
+            key={group.name}
+            className={`spotlight ${styles.group}`}
+            onPointerMove={trackSpotlight}
+          >
             <h3 className={styles.name}>
               <span className={styles.groupIcon}>
                 <Icon name={group.icon} size={16} />
