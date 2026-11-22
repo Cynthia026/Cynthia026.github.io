@@ -3,10 +3,12 @@ import type { Certification } from '@/types/content';
 /** Certificaciones y cursos, de lo más reciente a lo más antiguo. */
 export const certifications: Certification[] = [
   {
-    name: 'Fundamentos de Ciberseguridad',
-    issuer: 'Cisco Networking Academy, impartido por el Instituto Tecnológico de Pachuca',
+    name: 'Junior Cybersecurity Analyst Career Path',
+    issuer:
+      'Cisco Networking Academy. Incluye el curso Fundamentos de Ciberseguridad, impartido por el Instituto Tecnológico de Pachuca',
     date: '2026-01-29',
     url: 'certificados/cisco-fundamentos-ciberseguridad.pdf',
+    verifyUrl: 'https://www.credly.com/badges/ec2b6cfe-99d2-42f2-8eca-d09453bbf311/public_url',
   },
   {
     name: 'Introducción a Cisco Packet Tracer',
@@ -19,14 +21,14 @@ export const certifications: Certification[] = [
     issuer: 'Cisco Networking Academy',
     date: '2024-08-01',
     url: 'certificados/cisco-network-defense.pdf',
-    verifyUrl: 'https://www.credly.com/go/6TMFr2yN',
+    verifyUrl: 'https://www.credly.com/badges/ff10be25-e59e-4f60-8a2b-f0484ed38817/public_url',
   },
   {
     name: 'Python Essentials 1',
     issuer: 'Cisco Networking Academy y OpenEDG Python Institute',
     date: '2024-07-22',
     url: 'certificados/cisco-python-essentials-1.pdf',
-    verifyUrl: 'https://www.credly.com/go/UkZEShQN',
+    verifyUrl: 'https://www.credly.com/badges/3ea8eff2-f56a-46c4-9ce7-96dfe7f792d2/public_url',
   },
   {
     name: 'Con Educación Financiera: Construye tu Futuro Financiero (MOOC)',
@@ -35,7 +37,15 @@ export const certifications: Certification[] = [
     url: 'certificados/tecnm-educacion-financiera.pdf',
   },
   {
-    name: 'Cloud Foundations (insignia)',
-    issuer: 'AWS Educate',
+    name: 'Introduction to IoT',
+    issuer: 'Cisco Networking Academy',
+    date: '2022-02-23',
+    url: 'certificados/cisco-introduction-to-iot.pdf',
+    verifyUrl: 'https://www.credly.com/badges/7dc5e416-7fc2-4d92-82b6-1ca48c540703/public_url',
+  },
+  {
+    name: 'AWS Academy Graduate: Cloud Foundations (insignia)',
+    issuer: 'Amazon Web Services Training and Certification',
+    verifyUrl: 'https://www.credly.com/badges/9d302756-0158-4d11-b702-7578f1a13e56/public_url',
   },
 ];

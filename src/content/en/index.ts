@@ -95,9 +95,10 @@ const experienceText = [
 ];
 
 const certificationNames: Record<string, { name: string; issuer: string }> = {
-  'Fundamentos de Ciberseguridad': {
-    name: 'Cybersecurity Fundamentals',
-    issuer: 'Cisco Networking Academy, taught by Instituto Tecnológico de Pachuca',
+  'Junior Cybersecurity Analyst Career Path': {
+    name: 'Junior Cybersecurity Analyst Career Path',
+    issuer:
+      'Cisco Networking Academy. Includes the Cybersecurity Fundamentals course, taught by Instituto Tecnológico de Pachuca',
   },
   'Introducción a Cisco Packet Tracer': {
     name: 'Getting Started with Cisco Packet Tracer',
@@ -111,7 +112,10 @@ const certificationNames: Record<string, { name: string; issuer: string }> = {
     name: 'Python Essentials 1',
     issuer: 'Cisco Networking Academy and OpenEDG Python Institute',
   },
-  'Cloud Foundations (insignia)': { name: 'Cloud Foundations (badge)', issuer: 'AWS Educate' },
+  'AWS Academy Graduate: Cloud Foundations (insignia)': {
+    name: 'AWS Academy Graduate: Cloud Foundations (badge)',
+    issuer: 'Amazon Web Services Training and Certification',
+  },
 };
 
 function lookup<T>(table: Record<string, T>, key: string, what: string): T {
@@ -148,8 +152,8 @@ export const en: SiteContent = {
     },
     {
       label: 'Certifications',
-      value: 'Cisco Networking Academy, AWS Educate, and TecNM',
-      detail: 'Cybersecurity, network defense, Packet Tracer, Python, and cloud',
+      value: 'Cisco Networking Academy, AWS Academy, and TecNM',
+      detail: 'Cybersecurity, network defense, IoT, Packet Tracer, Python, and cloud',
     },
   ],
   coreStack: esStack.map((item) => ({
