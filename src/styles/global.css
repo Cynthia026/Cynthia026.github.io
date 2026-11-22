@@ -67,6 +67,31 @@ a {
   background-position: -1px -1px;
 }
 
+/* Foco de luz que sigue al cursor (ver lib/spotlight.ts) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    280px circle at var(--mx, 50%) var(--my, 50%),
+    var(--color-accent-soft),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+  pointer-events: none;
+}
+
+.spotlight:hover::after {
+  opacity: 1;
+}
+
 /* Panel con borde fino y esquinas rectas, sin sombra */
 .card {
   background: var(--color-surface);

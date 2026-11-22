@@ -127,30 +127,38 @@ function lookup<T>(table: Record<string, T>, key: string, what: string): T {
 export const en: SiteContent = {
   profile,
   titleBlock: [
-    { label: 'Author', value: profile.name },
-    { label: 'Specialty', value: 'Frontend and IoT' },
-    { label: 'Education', value: 'B.S. Computer Systems Engineering, TecNM Pachuca' },
-    { label: 'Location', value: 'Pachuca, Hidalgo' },
-    { label: 'Status', value: 'Open to internships' },
+    { icon: 'user', label: 'Author', value: profile.name },
+    { icon: 'cpu', label: 'Specialty', value: 'Frontend and IoT' },
+    {
+      icon: 'graduation',
+      label: 'Education',
+      value: 'B.S. Computer Systems Engineering, TecNM Pachuca',
+    },
+    { icon: 'mapPin', label: 'Location', value: 'Pachuca, Hidalgo' },
+    { icon: 'circleCheck', label: 'Status', value: 'Open to internships' },
   ],
   aboutFacts: [
     {
+      icon: 'graduation',
       label: 'Education',
       value: 'B.S. in Computer Systems Engineering',
       detail: 'Tecnológico Nacional de México, Pachuca campus, 2022 to 2026 (in progress)',
     },
     {
+      icon: 'target',
       label: 'Focus',
       value: 'Frontend, 3D interfaces, and IoT',
       detail: 'With my own backend when a project needs one',
     },
-    { label: 'Location', value: 'Pachuca, Hidalgo, Mexico' },
+    { icon: 'mapPin', label: 'Location', value: 'Pachuca, Hidalgo, Mexico' },
     {
+      icon: 'languages',
       label: 'Languages',
       value: 'Spanish (native)',
       detail: 'English intermediate (B1), technical reading and writing',
     },
     {
+      icon: 'badge',
       label: 'Certifications',
       value: 'Cisco Networking Academy, AWS Academy, and TecNM',
       detail: 'Cybersecurity, network defense, IoT, Packet Tracer, Python, and cloud',
@@ -173,6 +181,7 @@ export const en: SiteContent = {
   }),
   skills: [
     {
+      icon: 'layout',
       name: 'Frontend and design',
       items: [
         'JavaScript (ES6+)',
@@ -184,6 +193,7 @@ export const en: SiteContent = {
       ],
     },
     {
+      icon: 'globe',
       name: 'Browser APIs',
       items: [
         'Three.js and WebXR',
@@ -194,6 +204,7 @@ export const en: SiteContent = {
       ],
     },
     {
+      icon: 'server',
       name: 'Services and backend',
       items: [
         'REST APIs, JSON, and Fetch',
@@ -204,6 +215,7 @@ export const en: SiteContent = {
       ],
     },
     {
+      icon: 'network',
       name: 'Cloud, networks, and IoT',
       items: [
         'AWS (EC2 and RDS)',
@@ -215,6 +227,7 @@ export const en: SiteContent = {
       ],
     },
     {
+      icon: 'sparkles',
       name: 'Complementary',
       items: [
         'Generative AI and prompt engineering',
@@ -224,6 +237,7 @@ export const en: SiteContent = {
       ],
     },
     {
+      icon: 'languages',
       name: 'Languages',
       items: ['Spanish: native', 'English: intermediate (B1), technical reading and writing'],
     },

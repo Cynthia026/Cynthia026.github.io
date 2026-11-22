@@ -10,13 +10,72 @@
   gap: var(--space-5);
 }
 
-.photo {
-  width: 8rem;
-  height: 8rem;
-  object-fit: cover;
+.identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+/* Marco de lámina con marcas de esquina, como la figura del inicio */
+.photoFrame {
+  position: relative;
+  padding: 5px;
   border: 1px solid var(--color-line-strong);
-  padding: 4px;
   background: var(--color-surface);
+}
+
+.photoFrame::before,
+.photoFrame::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 0 solid var(--color-note);
+}
+
+.photoFrame::before {
+  top: -4px;
+  left: -4px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.photoFrame::after {
+  right: -4px;
+  bottom: -4px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+}
+
+.photo {
+  width: 9.5rem;
+  height: 9.5rem;
+  object-fit: cover;
+  filter: saturate(0.95);
+  transition: filter 0.3s var(--ease-out);
+}
+
+.photoFrame:hover .photo {
+  filter: saturate(1.1);
+}
+
+.name {
+  font-size: var(--step-1);
+  font-weight: 600;
+}
+
+.role {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-start: var(--space-1);
+  font: 500 var(--step--1) / 1.4 var(--font-mono);
+  color: var(--color-muted);
+}
+
+.role svg {
+  color: var(--color-accent);
 }
 
 .summary {
@@ -63,8 +122,16 @@
 }
 
 .factRow dt {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   font: 500 var(--step--1) / 1.5 var(--font-mono);
   color: var(--color-muted);
+}
+
+.factRow dt svg {
+  flex: none;
+  color: var(--color-accent);
 }
 
 .factRow dd {
@@ -155,4 +222,42 @@
   .table th:nth-child(2) {
     display: none;
   }
+}
+
+.component {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.componentIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-s);
+  background: var(--color-surface);
+  color: var(--color-accent);
+  transition:
+    background-color 0.2s var(--ease-out),
+    color 0.2s var(--ease-out);
+}
+
+.table tbody tr {
+  transition: background-color 0.15s var(--ease-out);
+}
+
+.table tbody tr:hover {
+  background: var(--color-accent-soft);
+}
+
+.table tbody tr:hover .componentIcon {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+/* La barra crece al entrar en pantalla (ver About.tsx) */
+.bar {
+  transition: inline-size 0.9s var(--ease-out);
 }

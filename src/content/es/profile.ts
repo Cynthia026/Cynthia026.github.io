@@ -13,6 +13,7 @@ export const profile: Profile = {
   availability: 'Disponible para prácticas profesionales y proyectos de frontend',
   // Archivo en public/cv.pdf. Reemplázalo cuando actualices tu CV.
   cvUrl: `${import.meta.env.BASE_URL}cv.pdf`,
+  photo: 'foto.webp',
   links: [
     { label: 'GitHub', href: 'https://github.com/Cynthia026' },
     {

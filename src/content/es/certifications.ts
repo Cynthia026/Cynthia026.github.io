@@ -3,6 +3,12 @@ import type { Certification } from '@/types/content';
 /** Certificaciones y cursos, de lo más reciente a lo más antiguo. */
 export const certifications: Certification[] = [
   {
+    name: 'AWS Academy Graduate: Cloud Foundations (insignia)',
+    issuer: 'Amazon Web Services Training and Certification',
+    date: '2026-09-09',
+    verifyUrl: 'https://www.credly.com/badges/9d302756-0158-4d11-b702-7578f1a13e56/public_url',
+  },
+  {
     name: 'Junior Cybersecurity Analyst Career Path',
     issuer:
       'Cisco Networking Academy. Incluye el curso Fundamentos de Ciberseguridad, impartido por el Instituto Tecnológico de Pachuca',
@@ -42,10 +48,5 @@ export const certifications: Certification[] = [
     date: '2022-02-23',
     url: 'certificados/cisco-introduction-to-iot.pdf',
     verifyUrl: 'https://www.credly.com/badges/7dc5e416-7fc2-4d92-82b6-1ca48c540703/public_url',
-  },
-  {
-    name: 'AWS Academy Graduate: Cloud Foundations (insignia)',
-    issuer: 'Amazon Web Services Training and Certification',
-    verifyUrl: 'https://www.credly.com/badges/9d302756-0158-4d11-b702-7578f1a13e56/public_url',
   },
 ];

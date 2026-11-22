@@ -1,9 +1,11 @@
 import type { ReactNode } from 'react';
 import { Section } from '@/components/layout/Section';
 import { CodeIcon, DownloadIcon, MailIcon, PhoneIcon, ProfileIcon } from '@/components/ui/icons';
+import { Icon } from '@/components/ui/Icon';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { useLanguage } from '@/i18n/useLanguage';
 import { toTelHref } from '@/lib/contact';
+import { trackSpotlight } from '@/lib/spotlight';
 import { ContactForm } from './ContactForm';
 import styles from './Contact.module.css';
 
@@ -20,7 +22,8 @@ interface MethodProps {
 function Method({ icon, label, value, href, external, download, newTabLabel }: MethodProps) {
   return (
     <a
-      className={styles.method}
+      className={`spotlight ${styles.method}`}
+      onPointerMove={trackSpotlight}
       href={href}
       download={download || undefined}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -48,7 +51,7 @@ export function Contact() {
   const { copied, copy } = useCopyToClipboard();
 
   return (
-    <Section id="contacto" number={6} title={t.contact.title} intro={t.contact.intro}>
+    <Section id="contacto" number={6} icon="send" title={t.contact.title} intro={t.contact.intro}>
       <div className={styles.grid}>
         <div className={styles.methods}>
           <div className={styles.emailRow}>
@@ -59,6 +62,7 @@ export function Contact() {
               href={`mailto:${profile.email}`}
             />
             <button type="button" className={styles.copy} onClick={() => copy(profile.email)}>
+              <Icon name={copied ? 'check' : 'copy'} size={16} />
               {copied ? t.contact.copied : t.contact.copy}
             </button>
             <span role="status" className="visually-hidden">

@@ -1,4 +1,5 @@
 import { MoonIcon, SunIcon } from '@/components/ui/icons';
+import { Icon, type IconName } from '@/components/ui/Icon';
 import { LanguageSwitch } from '@/components/ui/LanguageSwitch';
 import { ToggleButton } from '@/components/ui/ToggleButton';
 import { useLanguage } from '@/i18n/useLanguage';
@@ -7,13 +8,13 @@ import { useActiveSection } from '@/hooks/useActiveSection';
 import type { Theme } from '@/hooks/useTheme';
 import styles from './Header.module.css';
 
-const NAV_ITEMS: { id: string; key: keyof UiStrings['nav'] }[] = [
-  { id: 'sobre-mi', key: 'profile' },
-  { id: 'proyectos', key: 'projects' },
-  { id: 'laboratorio', key: 'lab' },
-  { id: 'trayectoria', key: 'experience' },
-  { id: 'habilidades', key: 'skills' },
-  { id: 'contacto', key: 'contact' },
+const NAV_ITEMS: { id: string; key: keyof UiStrings['nav']; icon: IconName }[] = [
+  { id: 'sobre-mi', key: 'profile', icon: 'user' },
+  { id: 'proyectos', key: 'projects', icon: 'folder' },
+  { id: 'laboratorio', key: 'lab', icon: 'flask' },
+  { id: 'trayectoria', key: 'experience', icon: 'history' },
+  { id: 'habilidades', key: 'skills', icon: 'wrench' },
+  { id: 'contacto', key: 'contact', icon: 'send' },
 ];
 
 // «inicio» se observa para limpiar el resaltado al volver arriba.
@@ -52,7 +53,9 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
                   className={styles.link}
                   aria-current={active === item.id ? 'location' : undefined}
                 >
-                  <span className={styles.linkNumber}>{index + 1}.</span> {t.nav[item.key]}
+                  <span className={styles.linkNumber}>{index + 1}.</span>
+                  <Icon name={item.icon} size={15} className={styles.linkIcon} />
+                  {t.nav[item.key]}
                 </a>
               </li>
             ))}

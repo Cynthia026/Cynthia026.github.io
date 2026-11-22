@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { Tag } from '@/components/ui/Tag';
 import { ChevronIcon, ExternalIcon } from '@/components/ui/icons';
 import { asset } from '@/lib/asset';
+import { trackSpotlight } from '@/lib/spotlight';
 import { ProjectCover } from './ProjectCover';
 import { useLanguage } from '@/i18n/useLanguage';
 import styles from './ProjectCard.module.css';
@@ -29,7 +30,8 @@ export function ProjectCard({ project, featured = false, figure }: ProjectCardPr
     <article
       id={project.slug}
       aria-labelledby={titleId}
-      className={`card ${styles.card} ${featured ? styles.featured : ''}`}
+      className={`card spotlight ${styles.card} ${featured ? styles.featured : ''}`}
+      onPointerMove={trackSpotlight}
     >
       <div className={styles.media}>
         {project.image ? (

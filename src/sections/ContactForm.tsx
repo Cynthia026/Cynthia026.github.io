@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useLanguage } from '@/i18n/useLanguage';
 import { buildMailto } from '@/lib/mailto';
+import { Icon } from '@/components/ui/Icon';
 import styles from './Contact.module.css';
 
 const LIMITS = { name: [1, 80], message: [10, 2000] } as const;
@@ -68,6 +69,7 @@ export function ContactForm() {
         {error}
       </p>
       <button type="submit" className={styles.submit}>
+        <Icon name="send" size={16} />
         {t.contact.submit}
       </button>
       <p className={styles.note}>{t.contact.note(profile.email)}</p>

@@ -1,6 +1,8 @@
+import { CircuitBackground } from '@/components/effects/CircuitBackground';
 import { Button } from '@/components/ui/Button';
 import { ContactList } from '@/components/ui/ContactList';
 import { DownloadIcon } from '@/components/ui/icons';
+import { Icon } from '@/components/ui/Icon';
 import { useLanguage } from '@/i18n/useLanguage';
 import { asset } from '@/lib/asset';
 import styles from './Hero.module.css';
@@ -13,6 +15,7 @@ export function Hero() {
 
   return (
     <section id="inicio" aria-labelledby="hero-title" className={`grid-paper ${styles.hero}`}>
+      <CircuitBackground />
       <div className={`container ${styles.grid}`}>
         <div className={styles.text}>
           <p className={styles.kicker}>{t.hero.kicker}</p>
@@ -23,7 +26,10 @@ export function Hero() {
           <p className={styles.headline}>{profile.headline}</p>
 
           <div className={styles.ctas}>
-            <Button href="#proyectos">{t.hero.seeProjects}</Button>
+            <Button href="#proyectos">
+              <Icon name="folder" size={16} />
+              {t.hero.seeProjects}
+            </Button>
             {profile.cvUrl && (
               <Button href={profile.cvUrl} variant="secondary" download>
                 <DownloadIcon />
@@ -77,7 +83,10 @@ export function Hero() {
         <dl className={styles.titleBlock}>
           {c.titleBlock.map((cell) => (
             <div key={cell.label} className={styles.cell}>
-              <dt>{cell.label}</dt>
+              <dt>
+                <Icon name={cell.icon} size={14} />
+                {cell.label}
+              </dt>
               <dd>{cell.value}</dd>
             </div>
           ))}

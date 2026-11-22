@@ -5,7 +5,13 @@ import { useLanguage } from '@/i18n/useLanguage';
 export function Projects() {
   const { c, t } = useLanguage();
   return (
-    <Section id="proyectos" number={2} title={t.projects.title} intro={t.projects.intro}>
+    <Section
+      id="proyectos"
+      number={2}
+      icon="folder"
+      title={t.projects.title}
+      intro={t.projects.intro}
+    >
       <ProjectList projects={c.projects} />
     </Section>
   );

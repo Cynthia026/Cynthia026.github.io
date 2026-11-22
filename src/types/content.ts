@@ -1,3 +1,5 @@
+import type { IconName } from '@/components/ui/Icon';
+
 /**
  * Modelos de contenido. Todo el texto del sitio vive en `src/content/<idioma>` y se tipa aquí;
  * ambos idiomas deben cumplir la misma forma (`SiteContent`).
@@ -29,6 +31,7 @@ export interface Profile {
 
 /** Dato breve que se muestra en un bloque de «Sobre mí». */
 export interface AboutFact {
+  icon: IconName;
   label: string;
   value: string;
   detail?: string;
@@ -121,6 +124,7 @@ export interface ExperienceItem {
 }
 
 export interface SkillGroup {
+  icon: IconName;
   name: string;
   items: string[];
 }
@@ -138,11 +142,13 @@ export interface Certification {
 
 /** Celda del cajetín (recuadro de datos del inicio). */
 export interface TitleCell {
+  icon: IconName;
   label: string;
   value: string;
 }
 
 export interface StackComponent {
+  icon: IconName;
   name: string;
   kind: string;
   /** Tecnologías de los proyectos que cuentan como uso de este componente. */

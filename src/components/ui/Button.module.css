@@ -1,8 +1,10 @@
 .button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
   min-height: 2.75rem;
   padding: 0 1.15rem;
   border: 1px solid transparent;
@@ -14,10 +16,25 @@
   white-space: nowrap;
   cursor: pointer;
   transition:
-    background-color 0.15s var(--ease-out),
-    color 0.15s var(--ease-out),
-    border-color 0.15s var(--ease-out),
+    background-color 0.2s var(--ease-out),
+    color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    box-shadow 0.2s var(--ease-out),
     transform 0.15s var(--ease-out);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.label svg {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.button:hover .label svg:first-child {
+  transform: translateY(-2px);
 }
 
 .button:active {
@@ -29,23 +46,49 @@
   padding: 0 0.85rem;
 }
 
+/* Primario: sombra dura desplazada, como un bloque en relieve de un plano */
 .primary {
   background: var(--color-accent);
   color: var(--color-accent-ink);
+  box-shadow: 3px 3px 0 var(--color-ink);
 }
 
 .primary:hover {
   background: var(--color-accent-hover);
+  box-shadow: 5px 5px 0 var(--color-ink);
+  transform: translate(-2px, -2px);
 }
 
+.primary:active {
+  box-shadow: 1px 1px 0 var(--color-ink);
+  transform: translate(2px, 2px);
+}
+
+/* Secundario: el relleno sube desde abajo al pasar el cursor */
 .secondary {
   border-color: var(--color-line-strong);
   background: var(--color-surface);
   color: var(--color-ink);
 }
 
+.secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-accent-soft);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.25s var(--ease-out);
+}
+
 .secondary:hover {
-  border-color: var(--color-ink);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.secondary:hover::before {
+  transform: scaleY(1);
 }
 
 .ghost {
@@ -57,4 +100,29 @@
 .ghost[aria-expanded='true'] {
   background: var(--color-surface-2);
   color: var(--color-ink);
+}
+
+.ripple {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.25;
+  transform: scale(0);
+  pointer-events: none;
+  animation: ripple 0.6s var(--ease-out) forwards;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary:hover,
+  .primary:active {
+    transform: none;
+  }
 }

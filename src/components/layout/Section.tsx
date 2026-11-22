@@ -1,10 +1,12 @@
 import type { ReactNode } from 'react';
+import { Icon, type IconName } from '@/components/ui/Icon';
 import styles from './Section.module.css';
 
 interface SectionProps {
   id: string;
   /** Número de sección, como en un documento técnico. */
   number: number;
+  icon: IconName;
   title: string;
   /** Texto breve que explica qué contiene la sección. */
   intro?: string;
@@ -12,7 +14,7 @@ interface SectionProps {
 }
 
 /** Contenedor semántico de cada sección: <section> con encabezado enlazado por aria-labelledby. */
-export function Section({ id, number, title, intro, children }: SectionProps) {
+export function Section({ id, number, icon, title, intro, children }: SectionProps) {
   const headingId = `${id}-title`;
   return (
     <section id={id} aria-labelledby={headingId} className={styles.section}>
@@ -21,6 +23,9 @@ export function Section({ id, number, title, intro, children }: SectionProps) {
           <h2 id={headingId} className={styles.title}>
             <span className={styles.number} aria-hidden="true">
               {number}.
+            </span>
+            <span className={styles.icon}>
+              <Icon name={icon} size={22} />
             </span>
             {title}
           </h2>

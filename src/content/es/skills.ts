@@ -2,6 +2,7 @@ import type { SkillGroup } from '@/types/content';
 
 export const skills: SkillGroup[] = [
   {
+    icon: 'layout',
     name: 'Frontend y diseño',
     items: [
       'JavaScript (ES6+)',
@@ -13,6 +14,7 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
+    icon: 'globe',
     name: 'APIs del navegador',
     items: [
       'Three.js y WebXR',
@@ -23,6 +25,7 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
+    icon: 'server',
     name: 'Servicios y backend',
     items: [
       'APIs REST, JSON y Fetch',
@@ -33,6 +36,7 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
+    icon: 'network',
     name: 'Nube, redes e IoT',
     items: [
       'AWS (EC2 y RDS)',
@@ -44,6 +48,7 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
+    icon: 'sparkles',
     name: 'Complementarias',
     items: [
       'IA generativa e ingeniería de prompts',
@@ -53,6 +58,7 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
+    icon: 'languages',
     name: 'Idiomas',
     items: ['Español: nativo', 'Inglés: intermedio (B1), lectura técnica y redacción'],
   },

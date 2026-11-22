@@ -1,5 +1,6 @@
 import { Section } from '@/components/layout/Section';
 import { ExternalIcon } from '@/components/ui/icons';
+import { Icon } from '@/components/ui/Icon';
 import { useLanguage } from '@/i18n/useLanguage';
 import { asset } from '@/lib/asset';
 import styles from './Skills.module.css';
@@ -14,11 +15,22 @@ export function Skills() {
   });
 
   return (
-    <Section id="habilidades" number={5} title={t.skills.title} intro={t.skills.intro}>
+    <Section
+      id="habilidades"
+      number={5}
+      icon="wrench"
+      title={t.skills.title}
+      intro={t.skills.intro}
+    >
       <div className={styles.grid}>
         {c.skills.map((group) => (
           <article key={group.name} className={styles.group}>
-            <h3 className={styles.name}>{group.name}</h3>
+            <h3 className={styles.name}>
+              <span className={styles.groupIcon}>
+                <Icon name={group.icon} size={16} />
+              </span>
+              {group.name}
+            </h3>
             <ul role="list" className={styles.items}>
               {group.items.map((item) => (
                 <li key={item}>{item}</li>
@@ -51,12 +63,16 @@ export function Skills() {
                   )}
                 </td>
                 <th scope="row" className={styles.cert}>
-                  <span className={styles.certName}>{cert.name}</span>
+                  <span className={styles.certName}>
+                    <Icon name={cert.verifyUrl ? 'badge' : 'award'} size={16} />
+                    {cert.name}
+                  </span>
                   <span className={styles.issuer}>{cert.issuer}</span>
                 </th>
                 <td className={styles.link}>
                   {cert.verifyUrl && (
                     <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer">
+                      <Icon name="shield" size={15} />
                       {t.skills.verify} <ExternalIcon />
                       <span className="visually-hidden">
                         {' '}
@@ -70,6 +86,7 @@ export function Skills() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
+                      <Icon name="file" size={15} />
                       {t.skills.view} <ExternalIcon />
                       <span className="visually-hidden">
                         {' '}

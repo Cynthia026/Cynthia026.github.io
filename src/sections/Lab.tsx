@@ -6,7 +6,7 @@ import styles from './Lab.module.css';
 export function Lab() {
   const { c, t } = useLanguage();
   return (
-    <Section id="laboratorio" number={3} title={t.lab.title} intro={t.lab.intro}>
+    <Section id="laboratorio" number={3} icon="flask" title={t.lab.title} intro={t.lab.intro}>
       <table className={styles.table}>
         <thead>
           <tr>

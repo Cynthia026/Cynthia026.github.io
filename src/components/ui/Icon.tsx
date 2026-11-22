@@ -1,0 +1,107 @@
+import {
+  Award,
+  BadgeCheck,
+  Box,
+  Braces,
+  Briefcase,
+  Check,
+  ChevronDown,
+  CircleCheck,
+  Cloud,
+  CodeXml,
+  Copy,
+  Cpu,
+  Database,
+  Download,
+  ExternalLink,
+  FileText,
+  FlaskConical,
+  FolderKanban,
+  Gamepad2,
+  Globe,
+  GraduationCap,
+  History,
+  Languages,
+  Layers,
+  LayoutTemplate,
+  Mail,
+  MapPin,
+  Moon,
+  Network,
+  Phone,
+  Rocket,
+  Send,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  SquareUser,
+  Sun,
+  Target,
+  Trophy,
+  User,
+  Users,
+  Workflow,
+  Wrench,
+  type LucideIcon,
+} from 'lucide-react';
+
+/** Íconos disponibles por nombre, para que el contenido elija ícono sin importar componentes. */
+const ICONS = {
+  award: Award,
+  badge: BadgeCheck,
+  box: Box,
+  braces: Braces,
+  briefcase: Briefcase,
+  check: Check,
+  chevron: ChevronDown,
+  circleCheck: CircleCheck,
+  cloud: Cloud,
+  code: CodeXml,
+  copy: Copy,
+  cpu: Cpu,
+  database: Database,
+  download: Download,
+  external: ExternalLink,
+  file: FileText,
+  flask: FlaskConical,
+  folder: FolderKanban,
+  game: Gamepad2,
+  globe: Globe,
+  graduation: GraduationCap,
+  history: History,
+  languages: Languages,
+  layers: Layers,
+  layout: LayoutTemplate,
+  mail: Mail,
+  mapPin: MapPin,
+  moon: Moon,
+  network: Network,
+  phone: Phone,
+  rocket: Rocket,
+  send: Send,
+  server: Server,
+  shield: ShieldCheck,
+  sparkles: Sparkles,
+  profile: SquareUser,
+  sun: Sun,
+  target: Target,
+  trophy: Trophy,
+  user: User,
+  users: Users,
+  workflow: Workflow,
+  wrench: Wrench,
+} satisfies Record<string, LucideIcon>;
+
+export type IconName = keyof typeof ICONS;
+
+interface IconProps {
+  name: IconName;
+  size?: number;
+  className?: string;
+}
+
+/** Ícono decorativo: siempre va acompañado de texto, por eso se oculta a lectores de pantalla. */
+export function Icon({ name, size = 18, className }: IconProps) {
+  const Component = ICONS[name];
+  return <Component size={size} strokeWidth={1.75} className={className} aria-hidden="true" />;
+}

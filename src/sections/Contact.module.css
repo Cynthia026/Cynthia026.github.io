@@ -35,7 +35,20 @@
 }
 
 .method:hover {
-  border-color: var(--color-line-strong);
+  border-color: var(--color-accent);
+}
+
+.methodIcon {
+  transition:
+    background-color 0.2s var(--ease-out),
+    color 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out);
+}
+
+.method:hover .methodIcon {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  transform: rotate(-6deg) scale(1.05);
 }
 
 .methodIcon {
@@ -65,6 +78,10 @@
 }
 
 .copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
   padding: 0 var(--space-5);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-m);
@@ -129,6 +146,9 @@
 }
 
 .submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   justify-self: start;
   min-height: 2.75rem;
   padding: 0 1.25rem;
@@ -143,6 +163,14 @@
 
 .submit:hover {
   background: var(--color-accent-hover);
+}
+
+.submit svg {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.submit:hover svg {
+  transform: translate(3px, -3px);
 }
 
 .note {

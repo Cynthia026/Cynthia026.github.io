@@ -10,11 +10,15 @@ import { skills } from './skills';
 export const es: SiteContent = {
   profile,
   titleBlock: [
-    { label: 'Autora', value: profile.name },
-    { label: 'Especialidad', value: 'Frontend e IoT' },
-    { label: 'Formación', value: 'Ing. en Sistemas Computacionales, TecNM Pachuca' },
-    { label: 'Ubicación', value: 'Pachuca, Hidalgo' },
-    { label: 'Estado', value: 'Disponible para prácticas' },
+    { icon: 'user', label: 'Autora', value: profile.name },
+    { icon: 'cpu', label: 'Especialidad', value: 'Frontend e IoT' },
+    {
+      icon: 'graduation',
+      label: 'Formación',
+      value: 'Ing. en Sistemas Computacionales, TecNM Pachuca',
+    },
+    { icon: 'mapPin', label: 'Ubicación', value: 'Pachuca, Hidalgo' },
+    { icon: 'circleCheck', label: 'Estado', value: 'Disponible para prácticas' },
   ],
   aboutFacts,
   coreStack,
