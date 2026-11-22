@@ -19,7 +19,16 @@ export interface Profile {
   phone?: string;
   availability: string;
   cvUrl?: string;
+  /** Foto en /public (p. ej. `foto.webp`). Si falta, se muestran las iniciales. */
+  photo?: string;
   links: SocialLink[];
+}
+
+/** Dato breve que se muestra en un bloque de «Sobre mí». */
+export interface AboutFact {
+  label: string;
+  value: string;
+  detail?: string;
 }
 
 export type Tech =
@@ -60,12 +69,14 @@ export interface Project {
   /** Contexto: materia, empresa, cliente o proyecto personal. */
   context: string;
   role: string;
+  /** Si fue en equipo, con quién. */
+  team?: string;
   summary: string;
   problem: string;
   solution: string;
   stack: Tech[];
   metrics?: ProjectMetric[];
-  /** Ruta a una captura en /public (p. ej. `/projects/tienda.webp`). Si falta, se dibuja un esquema. */
+  /** Captura dentro de /public, sin barra inicial (p. ej. `projects/tienda.webp`). Si falta, se dibuja un esquema. */
   image?: string;
   demoUrl?: string;
   repoUrl?: string;
@@ -82,11 +93,15 @@ export interface LabItem {
   repoUrl: string;
 }
 
+export type ExperienceKind = 'Educación' | 'Proyecto' | 'Trabajo' | 'Certificación';
+
 export interface ExperienceItem {
+  kind: ExperienceKind;
   period: string;
   title: string;
   place: string;
   description: string;
+  tags?: string[];
 }
 
 export interface SkillGroup {

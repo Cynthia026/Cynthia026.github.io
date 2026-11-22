@@ -4,17 +4,24 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  margin-block-end: var(--space-12);
+  margin-block-end: var(--space-6);
 }
 
 .count {
-  font-size: var(--step--1);
+  font: 500 var(--step--2) / 1.5 var(--font-mono);
   color: var(--color-muted);
-  font-variant-numeric: tabular-nums;
 }
 
 .list {
   display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 48rem) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .empty button {

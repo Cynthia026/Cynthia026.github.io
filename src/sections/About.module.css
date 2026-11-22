@@ -1,0 +1,151 @@
+.bento {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.profile,
+.stack,
+.fact {
+  padding: var(--space-6);
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4) var(--space-5);
+  align-items: center;
+  align-content: start;
+}
+
+.avatar {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: var(--radius-l);
+  object-fit: cover;
+}
+
+.initials {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--color-accent), #6b4fe0);
+  color: #fff;
+  font: 700 1.5rem / 1 var(--font-display);
+}
+
+.profileText {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.profileName {
+  font-size: var(--step-1);
+}
+
+.profileRole {
+  color: var(--color-muted);
+  font-size: var(--step--1);
+}
+
+.summary,
+.status {
+  grid-column: 1 / -1;
+}
+
+.summary {
+  color: var(--color-muted);
+  max-width: var(--measure);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: var(--color-green-soft);
+  color: var(--color-green);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.statusDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.cardLabel {
+  margin-block-end: var(--space-4);
+  font: 500 var(--step--2) / 1.4 var(--font-mono);
+  letter-spacing: 0;
+  color: var(--color-muted);
+}
+
+.stackGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: var(--space-2);
+}
+
+.stackGrid li {
+  padding: var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-m);
+  background: var(--color-surface-2);
+  font-size: var(--step--1);
+  font-weight: 600;
+  text-align: center;
+}
+
+.fact {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+}
+
+.fact .cardLabel {
+  margin-block-end: var(--space-2);
+}
+
+.factValue {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.factDetail {
+  color: var(--color-muted);
+  font-size: var(--step--1);
+}
+
+@media (min-width: 40rem) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile,
+  .stack {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 64rem) {
+  .bento {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .profile {
+    grid-column: 1 / span 7;
+  }
+
+  .stack {
+    grid-column: 8 / -1;
+  }
+
+  .fact {
+    grid-column: span 3;
+  }
+}

@@ -1,10 +1,11 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './Button.module.css';
 
-type Variant = 'primary' | 'secondary';
+type Variant = 'primary' | 'secondary' | 'ghost';
 
 interface CommonProps {
   variant?: Variant;
+  size?: 'default' | 'small';
   children: ReactNode;
 }
 
@@ -13,8 +14,10 @@ type NativeButtonProps = CommonProps & ButtonHTMLAttributes<HTMLButtonElement> &
 
 /** Un botón que se renderiza como <a> si recibe `href` y como <button> en otro caso. */
 export function Button(props: LinkProps | NativeButtonProps) {
-  const { variant = 'primary', className, children, ...rest } = props;
-  const classes = [styles.button, styles[variant], className].filter(Boolean).join(' ');
+  const { variant = 'primary', size = 'default', className, children, ...rest } = props;
+  const classes = [styles.button, styles[variant], size === 'small' && styles.small, className]
+    .filter(Boolean)
+    .join(' ');
 
   if ('href' in rest && rest.href !== undefined) {
     const isExternal = /^https?:\/\//.test(rest.href);

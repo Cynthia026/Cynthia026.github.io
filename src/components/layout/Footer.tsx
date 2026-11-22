@@ -7,7 +7,7 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <p>
-          © {year} {profile.name}
+          © {year} {profile.name}. {profile.location}.
         </p>
         <p>Hecho con React, TypeScript y CSS Modules.</p>
       </div>

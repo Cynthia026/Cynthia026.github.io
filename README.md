@@ -29,7 +29,8 @@ Todo el texto vive en `src/content/`. **No necesitas tocar componentes** para ac
 
 Los tipos en `src/types/content.ts` validan que no falte ningún campo.
 
-- **Capturas de proyectos:** guárdalas en `public/projects/` y agrega `image: '/projects/archivo.webp'`. Sin imagen se dibuja un esquema automático.
+- **Capturas de proyectos:** guárdalas en `public/projects/` y agrega `image: 'projects/archivo.webp'`. Sin imagen se muestra una portada con el nombre del proyecto.
+- **Foto de perfil:** guárdala como `public/foto.webp` y agrega `photo: 'foto.webp'` en `profile.ts`. Sin foto se muestran tus iniciales.
 - **CV:** coloca tu archivo como `public/cv.pdf`.
 - **Título y descripción SEO:** edítalos en `index.html`.
 
@@ -46,8 +47,8 @@ src/
 │   ├── layout/     Header, Footer, Section, SkipLink
 │   └── ui/         Button, Tag, ToggleButton, ContactList, iconos
 ├── features/
-│   └── projects/   Módulo autocontenido: lista, filtro, fila, lógica y tests
-├── sections/       Secciones de la página (Hero, Projects, Experience, Skills, Contact)
+│   └── projects/   Módulo autocontenido: lista, filtro, tarjetas, lógica y tests
+├── sections/       Secciones de la página (Hero, About, Projects, Lab, Experience, Skills, Contact)
 ├── App.tsx         Composición de la página
 └── main.tsx        Punto de entrada
 ```

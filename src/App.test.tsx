@@ -12,6 +12,15 @@ beforeAll(() => {
 });
 
 describe('App', () => {
+  it('despliega los detalles de un proyecto', () => {
+    render(<App />);
+    const [toggle] = screen.getAllByRole('button', { name: /ver detalles/i });
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    fireEvent.click(toggle!);
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    expect(toggle).toHaveTextContent(/ocultar detalles/i);
+  });
+
   it('muestra un único h1 con el nombre', () => {
     render(<App />);
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
@@ -22,6 +31,7 @@ describe('App', () => {
     const group = screen.getByRole('group', { name: /filtrar proyectos/i });
     fireEvent.click(within(group).getByRole('button', { name: 'Node.js' }));
     const expected = projects.filter((p) => p.stack.includes('Node.js')).length;
-    expect(screen.getAllByRole('article')).toHaveLength(expected);
+    const section = screen.getByRole('region', { name: 'Proyectos destacados' });
+    expect(within(section).getAllByRole('article')).toHaveLength(expected);
   });
 });
