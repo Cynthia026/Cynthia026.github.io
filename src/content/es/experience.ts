@@ -3,7 +3,7 @@ import type { ExperienceItem } from '@/types/content';
 /** Formación y etapas de trabajo, de lo más reciente a lo más antiguo. */
 export const experience: ExperienceItem[] = [
   {
-    kind: 'Educación',
+    kind: 'education',
     period: 'Ago 2022 — 2026',
     title: 'Ingeniería en Sistemas Computacionales',
     place: 'Tecnológico Nacional de México, campus Pachuca',
@@ -11,7 +11,7 @@ export const experience: ExperienceItem[] = [
       'En curso. Áreas de enfoque: desarrollo web, sistemas programables, redes de computadoras, graficación e IoT.',
   },
   {
-    kind: 'Proyecto',
+    kind: 'project',
     period: 'Oct — nov 2026',
     title: 'Sistemas IoT, 3D y realidad virtual',
     place: 'Proyecto integrador',
@@ -20,7 +20,7 @@ export const experience: ExperienceItem[] = [
     tags: ['Three.js', 'WebXR', 'FastAPI', 'AWS'],
   },
   {
-    kind: 'Proyecto',
+    kind: 'project',
     period: 'Feb — may 2026',
     title: 'Desarrollo web full stack',
     place: 'Proyectos académicos',
@@ -29,7 +29,7 @@ export const experience: ExperienceItem[] = [
     tags: ['Spring Boot', 'Node.js', 'Angular'],
   },
   {
-    kind: 'Proyecto',
+    kind: 'project',
     period: 'Feb — may 2025',
     title: 'Graficación y programación lógica',
     place: 'Proyectos académicos',

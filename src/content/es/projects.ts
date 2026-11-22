@@ -74,6 +74,7 @@ export const projects: Project[] = [
       { value: '5', label: 'juegos educativos' },
       { value: '3', label: 'paneles por rol' },
     ],
+    image: 'projects/neurolearn.webp',
     repoUrl: `${GH}/neurolearn-frontend`,
     related: [{ label: 'Backend (Express y Prisma)', href: `${GH}/neurolearn-backend` }],
   },
@@ -113,6 +114,7 @@ export const projects: Project[] = [
       'Diseñé un semáforo de ocupación con desglose por piso y gráfica del día, mapas SVG interactivos para enchufes y WiFi, y un sistema de reportes con votos y estados (pendiente, en proceso, resuelto). Los datos vienen de una API propia en Node.js y se actualizan periódicamente.',
     stack: ['JavaScript', 'SVG', 'Chart.js', 'Node.js'],
     metrics: [{ value: '4', label: 'módulos de servicio' }],
+    image: 'projects/smartcampus.webp',
     repoUrl: `${GH}/SmartCampus`,
   },
   {

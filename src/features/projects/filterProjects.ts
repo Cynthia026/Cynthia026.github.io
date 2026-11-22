@@ -1,6 +1,7 @@
 import type { Project, Tech } from '@/types/content';
 
-export const ALL = 'Todos' as const;
+/** Valor interno del filtro «todos»; la etiqueta visible viene de la interfaz. */
+export const ALL = 'all' as const;
 export type TechFilter = Tech | typeof ALL;
 
 /** Tecnologías presentes en los proyectos, ordenadas por frecuencia de uso. */

@@ -20,25 +20,28 @@ npm run dev        # servidor de desarrollo en http://localhost:5173
 
 ## Personalizar tu contenido
 
-Todo el texto vive en `src/content/`. **No necesitas tocar componentes** para actualizar el portafolio:
+El sitio está en **español e inglés**. Todo el texto vive en `src/content/` y `src/i18n/`; no necesitas tocar componentes:
 
-- `profile.ts` — nombre, rol, frase principal, correo, enlaces y CV.
-- `projects.ts` — proyectos destacados (reto, solución, rol, stack, métricas, enlaces).
-- `experience.ts` — trayectoria profesional y académica.
-- `skills.ts` — habilidades agrupadas.
+| Archivo               | Qué contiene                                                                                                                                        |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/content/es/*.ts` | Contenido en español: perfil, proyectos, laboratorio, trayectoria, habilidades y certificaciones. Las URLs, imágenes y tecnologías se definen aquí. |
+| `src/content/en/*.ts` | Traducción al inglés. Toma URLs, imágenes y tecnologías del español y solo cambia el texto.                                                         |
+| `src/i18n/ui.ts`      | Textos de la interfaz (botones, títulos de sección, etiquetas) en ambos idiomas.                                                                    |
 
-Los tipos en `src/types/content.ts` validan que no falte ningún campo.
+Las pruebas (`npm test`) fallan si agregas un proyecto, práctica, etapa o certificación en español y olvidas traducirlo.
 
-- **Capturas de proyectos:** guárdalas en `public/projects/` y agrega `image: 'projects/archivo.webp'`. Sin imagen se muestra una portada con el nombre del proyecto.
-- **Foto de perfil:** guárdala como `public/foto.webp` y agrega `photo: 'foto.webp'` en `profile.ts`. Sin foto se muestran tus iniciales.
-- **CV:** coloca tu archivo como `public/cv.pdf`.
-- **Título y descripción SEO:** edítalos en `index.html`.
+- **Idioma inicial:** `?lang=en` en la URL, luego la última elección guardada, luego el idioma del navegador. Comparte `https://<usuario>.github.io/?lang=en` con reclutadores que no hablan español.
+- **Capturas de proyectos:** en `public/projects/`, con `image: 'projects/archivo.webp'`. Sin imagen se muestra una portada con el nombre.
+- **Certificados:** PDFs en `public/certificados/`, listados en `src/content/es/certifications.ts`.
+- **Foto de perfil:** `public/foto.webp` y `photo: 'foto.webp'` en `src/content/es/profile.ts`.
+- **CV:** `public/cv.pdf`.
 
 ## Arquitectura
 
 ```
 src/
-├── content/        Datos del sitio (única fuente de verdad del contenido)
+├── content/        Contenido por idioma (es/, en/) con pruebas de paridad
+├── i18n/           Idiomas: textos de interfaz, proveedor y hook useLanguage
 ├── types/          Modelos TypeScript del contenido
 ├── styles/         tokens.css (diseño), reset.css, global.css
 ├── lib/            Utilidades puras sin React

@@ -5,6 +5,7 @@ import { Tag } from '@/components/ui/Tag';
 import { ChevronIcon, ExternalIcon } from '@/components/ui/icons';
 import { asset } from '@/lib/asset';
 import { ProjectCover } from './ProjectCover';
+import { useLanguage } from '@/i18n/useLanguage';
 import styles from './ProjectCard.module.css';
 
 const MAX_TAGS = 6;
@@ -18,6 +19,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, featured = false, figure }: ProjectCardProps) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const detailsId = useId();
   const titleId = `${project.slug}-title`;
@@ -33,7 +35,7 @@ export function ProjectCard({ project, featured = false, figure }: ProjectCardPr
         {project.image ? (
           <img
             src={asset(project.image)}
-            alt={`Captura de ${project.title}`}
+            alt={`${t.hero.screenshotOf} ${project.title}`}
             loading="lazy"
             decoding="async"
             width={800}
@@ -55,7 +57,7 @@ export function ProjectCard({ project, featured = false, figure }: ProjectCardPr
         </h3>
         <p className={styles.summary}>{project.summary}</p>
 
-        <ul role="list" className={styles.tags} aria-label="Tecnologías">
+        <ul role="list" className={styles.tags} aria-label={t.projects.technologies}>
           {project.stack.slice(0, MAX_TAGS).map((tech) => (
             <li key={tech}>
               <Tag>{tech}</Tag>
@@ -71,15 +73,21 @@ export function ProjectCard({ project, featured = false, figure }: ProjectCardPr
         <div className={styles.actions}>
           {project.demoUrl && (
             <Button href={project.demoUrl} size="small">
-              Ver demo
+              {t.projects.demo}
               <ExternalIcon />
-              <span className="visually-hidden"> de {project.title} (abre en otra pestaña)</span>
+              <span className="visually-hidden">
+                {' '}
+                {t.projects.of} {project.title} {t.a11y.newTab}
+              </span>
             </Button>
           )}
           {project.repoUrl && (
             <Button href={project.repoUrl} size="small" variant="secondary">
-              Código
-              <span className="visually-hidden"> de {project.title} (abre en otra pestaña)</span>
+              {t.projects.code}
+              <span className="visually-hidden">
+                {' '}
+                {t.projects.of} {project.title} {t.a11y.newTab}
+              </span>
             </Button>
           )}
           <Button
@@ -90,7 +98,7 @@ export function ProjectCard({ project, featured = false, figure }: ProjectCardPr
             onClick={() => setOpen((v) => !v)}
             className={styles.toggle}
           >
-            {open ? 'Ocultar detalles' : 'Ver detalles'}
+            {open ? t.projects.hideDetails : t.projects.showDetails}
             <ChevronIcon />
           </Button>
         </div>
@@ -98,26 +106,34 @@ export function ProjectCard({ project, featured = false, figure }: ProjectCardPr
         <div id={detailsId} className={styles.details} hidden={!open}>
           <dl className={styles.dl}>
             <div>
-              <dt>Reto</dt>
+              <dt>{t.projects.challenge}</dt>
               <dd>{project.problem}</dd>
             </div>
             <div>
-              <dt>Qué hice</dt>
+              <dt>{t.projects.whatIDid}</dt>
               <dd>{project.solution}</dd>
             </div>
             <div>
-              <dt>Mi rol</dt>
+              <dt>{t.projects.myRole}</dt>
               <dd>
                 {project.role}
-                {project.team && <> con {project.team}</>}
+                {project.team && (
+                  <>
+                    {' '}
+                    {t.projects.with} {project.team}
+                  </>
+                )}
               </dd>
             </div>
           </dl>
 
           {project.architecture && (
             <div>
-              <p className={styles.detailTitle}>Arquitectura</p>
-              <ol className={styles.architecture} aria-label={`Arquitectura de ${project.title}`}>
+              <p className={styles.detailTitle}>{t.projects.architecture}</p>
+              <ol
+                className={styles.architecture}
+                aria-label={`${t.projects.architectureOf} ${project.title}`}
+              >
                 {project.architecture.map((layer) => (
                   <li key={layer.name}>
                     <strong>{layer.name}</strong>
@@ -129,7 +145,7 @@ export function ProjectCard({ project, featured = false, figure }: ProjectCardPr
           )}
 
           {project.metrics && project.metrics.length > 0 && (
-            <ul role="list" className={styles.metrics} aria-label="Resultados">
+            <ul role="list" className={styles.metrics} aria-label={t.projects.results}>
               {project.metrics.map((metric) => (
                 <li key={metric.label}>
                   <strong>{metric.value}</strong>
@@ -141,11 +157,11 @@ export function ProjectCard({ project, featured = false, figure }: ProjectCardPr
 
           {project.related && (
             <p className={styles.related}>
-              <span>Repos relacionados:</span>
+              <span>{t.projects.related}</span>
               {project.related.map((link) => (
                 <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
                   {link.label}
-                  <span className="visually-hidden"> (abre en otra pestaña)</span>
+                  <span className="visually-hidden"> {t.a11y.newTab}</span>
                 </a>
               ))}
             </p>

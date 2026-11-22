@@ -1,17 +1,22 @@
-import { skills } from '@/content';
 import { Section } from '@/components/layout/Section';
+import { ExternalIcon } from '@/components/ui/icons';
+import { useLanguage } from '@/i18n/useLanguage';
+import { asset } from '@/lib/asset';
 import styles from './Skills.module.css';
 
 export function Skills() {
+  const { c, t, locale } = useLanguage();
+  const formatDate = new Intl.DateTimeFormat(locale === 'es' ? 'es-MX' : 'en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+
   return (
-    <Section
-      id="habilidades"
-      number={5}
-      title="Habilidades y certificaciones"
-      intro="Herramientas con las que están construidos mis proyectos, más mi certificación e idiomas."
-    >
+    <Section id="habilidades" number={5} title={t.skills.title} intro={t.skills.intro}>
       <div className={styles.grid}>
-        {skills.map((group) => (
+        {c.skills.map((group) => (
           <article key={group.name} className={styles.group}>
             <h3 className={styles.name}>{group.name}</h3>
             <ul role="list" className={styles.items}>
@@ -21,6 +26,53 @@ export function Skills() {
             </ul>
           </article>
         ))}
+      </div>
+
+      <div className={styles.certs}>
+        <h3 className={styles.tableTitle}>{t.skills.certifications}</h3>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th scope="col">{t.skills.date}</th>
+              <th scope="col">{t.skills.name}</th>
+              <th scope="col">
+                <span className="visually-hidden">{t.skills.view}</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {c.certifications.map((cert) => (
+              <tr key={cert.name}>
+                <td className={styles.date}>
+                  {cert.date ? (
+                    <time dateTime={cert.date}>{formatDate.format(new Date(cert.date))}</time>
+                  ) : (
+                    <span className={styles.noDate}>{t.skills.noDate}</span>
+                  )}
+                </td>
+                <th scope="row" className={styles.cert}>
+                  <span className={styles.certName}>{cert.name}</span>
+                  <span className={styles.issuer}>{cert.issuer}</span>
+                </th>
+                <td className={styles.link}>
+                  {cert.url && (
+                    <a
+                      href={/^https?:/.test(cert.url) ? cert.url : asset(cert.url)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t.skills.view} <ExternalIcon />
+                      <span className="visually-hidden">
+                        {' '}
+                        {cert.name} {t.a11y.newTab}
+                      </span>
+                    </a>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </Section>
   );

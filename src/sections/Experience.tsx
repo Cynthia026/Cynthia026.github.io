@@ -1,37 +1,34 @@
-import { experience } from '@/content';
 import { Section } from '@/components/layout/Section';
 import { Tag } from '@/components/ui/Tag';
 import type { ExperienceKind } from '@/types/content';
+import { useLanguage } from '@/i18n/useLanguage';
 import styles from './Experience.module.css';
 
 const KIND_CLASS: Record<ExperienceKind, string | undefined> = {
-  Educación: styles.education,
-  Proyecto: styles.project,
-  Trabajo: styles.work,
-  Certificación: styles.work,
+  education: styles.education,
+  project: styles.project,
+  work: styles.work,
 };
 
 export function Experience() {
+  const { c, t } = useLanguage();
   return (
-    <Section
-      id="trayectoria"
-      number={4}
-      title="Trayectoria"
-      intro="Mi formación y cómo ha crecido mi trabajo, de lo más reciente a lo más antiguo."
-    >
+    <Section id="trayectoria" number={4} title={t.experience.title} intro={t.experience.intro}>
       <ol role="list" className={styles.log}>
-        {experience.map((item) => (
+        {c.experience.map((item) => (
           <li key={`${item.period}-${item.title}`} className={styles.entry}>
             <div className={styles.when}>
               <span className={styles.period}>{item.period}</span>
-              <span className={`${styles.kind} ${KIND_CLASS[item.kind] ?? ''}`}>{item.kind}</span>
+              <span className={`${styles.kind} ${KIND_CLASS[item.kind] ?? ''}`}>
+                {t.experience.kinds[item.kind]}
+              </span>
             </div>
             <div className={styles.what}>
               <h3 className={styles.title}>{item.title}</h3>
               <p className={styles.place}>{item.place}</p>
               <p className={styles.description}>{item.description}</p>
               {item.tags && (
-                <ul role="list" className={styles.tags} aria-label="Tecnologías">
+                <ul role="list" className={styles.tags} aria-label={t.projects.technologies}>
                   {item.tags.map((tag) => (
                     <li key={tag}>
                       <Tag>{tag}</Tag>

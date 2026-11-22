@@ -1,4 +1,7 @@
-/** Modelos de contenido. Todo el texto del sitio vive en `src/content` y se tipa aquí. */
+/**
+ * Modelos de contenido. Todo el texto del sitio vive en `src/content/<idioma>` y se tipa aquí;
+ * ambos idiomas deben cumplir la misma forma (`SiteContent`).
+ */
 
 export interface SocialLink {
   label: string;
@@ -104,7 +107,7 @@ export interface LabItem {
   repoUrl: string;
 }
 
-export type ExperienceKind = 'Educación' | 'Proyecto' | 'Trabajo' | 'Certificación';
+export type ExperienceKind = 'education' | 'project' | 'work';
 
 export interface ExperienceItem {
   kind: ExperienceKind;
@@ -118,4 +121,39 @@ export interface ExperienceItem {
 export interface SkillGroup {
   name: string;
   items: string[];
+}
+
+export interface Certification {
+  name: string;
+  issuer: string;
+  /** Fecha ISO (AAAA-MM-DD); se formatea según el idioma. */
+  date?: string;
+  /** Archivo en /public (p. ej. `certificados/x.pdf`) o enlace de verificación. */
+  url?: string;
+}
+
+/** Celda del cajetín (recuadro de datos del inicio). */
+export interface TitleCell {
+  label: string;
+  value: string;
+}
+
+export interface StackComponent {
+  name: string;
+  kind: string;
+  /** Tecnologías de los proyectos que cuentan como uso de este componente. */
+  matches: Tech[];
+}
+
+/** Todo el contenido del sitio en un idioma. */
+export interface SiteContent {
+  profile: Profile;
+  titleBlock: TitleCell[];
+  aboutFacts: AboutFact[];
+  coreStack: StackComponent[];
+  projects: Project[];
+  lab: LabItem[];
+  experience: ExperienceItem[];
+  skills: SkillGroup[];
+  certifications: Certification[];
 }

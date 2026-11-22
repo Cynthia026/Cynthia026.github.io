@@ -25,16 +25,17 @@
 }
 
 .name {
-  display: grid;
-  gap: 2px;
   font-weight: 400;
 }
 
 .title {
+  display: block;
   font-weight: 600;
 }
 
 .description {
+  display: block;
+  margin-block-start: 2px;
   color: var(--color-muted);
   font-size: var(--step--1);
 }

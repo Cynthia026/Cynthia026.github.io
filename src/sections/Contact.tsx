@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
-import { profile } from '@/content';
 import { Section } from '@/components/layout/Section';
 import { CodeIcon, DownloadIcon, MailIcon, PhoneIcon, ProfileIcon } from '@/components/ui/icons';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
+import { useLanguage } from '@/i18n/useLanguage';
 import { toTelHref } from '@/lib/contact';
 import { ContactForm } from './ContactForm';
 import styles from './Contact.module.css';
@@ -14,9 +14,10 @@ interface MethodProps {
   href: string;
   external?: boolean;
   download?: boolean;
+  newTabLabel?: string;
 }
 
-function Method({ icon, label, value, href, external, download }: MethodProps) {
+function Method({ icon, label, value, href, external, download, newTabLabel }: MethodProps) {
   return (
     <a
       className={styles.method}
@@ -31,7 +32,7 @@ function Method({ icon, label, value, href, external, download }: MethodProps) {
         <span className={styles.methodLabel}>{label}</span>
         <span className={styles.methodValue}>{value}</span>
       </span>
-      {external && <span className="visually-hidden"> (abre en otra pestaña)</span>}
+      {external && <span className="visually-hidden"> {newTabLabel}</span>}
     </a>
   );
 }
@@ -42,35 +43,32 @@ const LINK_ICONS: Record<string, ReactNode> = {
 };
 
 export function Contact() {
+  const { c, t } = useLanguage();
+  const profile = c.profile;
   const { copied, copy } = useCopyToClipboard();
 
   return (
-    <Section
-      id="contacto"
-      number={6}
-      title="Contacto"
-      intro="Si buscas a alguien para tu equipo de frontend o tienes un proyecto en mente, escríbeme."
-    >
+    <Section id="contacto" number={6} title={t.contact.title} intro={t.contact.intro}>
       <div className={styles.grid}>
         <div className={styles.methods}>
           <div className={styles.emailRow}>
             <Method
               icon={<MailIcon />}
-              label="Correo"
+              label={t.contactLabels.email}
               value={profile.email}
               href={`mailto:${profile.email}`}
             />
             <button type="button" className={styles.copy} onClick={() => copy(profile.email)}>
-              {copied ? 'Copiado' : 'Copiar'}
+              {copied ? t.contact.copied : t.contact.copy}
             </button>
             <span role="status" className="visually-hidden">
-              {copied ? 'Correo copiado al portapapeles' : ''}
+              {copied ? t.contact.copiedStatus : ''}
             </span>
           </div>
           {profile.phone && (
             <Method
               icon={<PhoneIcon />}
-              label="Teléfono"
+              label={t.contactLabels.phone}
               value={profile.phone}
               href={toTelHref(profile.phone)}
             />
@@ -83,13 +81,14 @@ export function Contact() {
               value={link.display ?? link.href.replace(/^https?:\/\/(www\.)?/, '')}
               href={link.href}
               external
+              newTabLabel={t.a11y.newTab}
             />
           ))}
           {profile.cvUrl && (
             <Method
               icon={<DownloadIcon />}
-              label="Currículum"
-              value="Descargar en PDF"
+              label={t.contact.cv}
+              value={t.contact.cvValue}
               href={profile.cvUrl}
               download
             />

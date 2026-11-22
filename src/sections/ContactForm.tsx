@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { profile } from '@/content';
+import { useLanguage } from '@/i18n/useLanguage';
 import { buildMailto } from '@/lib/mailto';
 import styles from './Contact.module.css';
 
@@ -10,6 +10,8 @@ const LIMITS = { name: [1, 80], message: [10, 2000] } as const;
  * Así funciona en GitHub Pages sin exponer credenciales ni depender de servicios externos.
  */
 export function ContactForm() {
+  const { c, t } = useLanguage();
+  const profile = c.profile;
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -19,17 +21,17 @@ export function ContactForm() {
     const trimmedName = name.trim();
     const trimmedMessage = message.trim();
     if (trimmedName.length < LIMITS.name[0]) {
-      setError('Escribe tu nombre para saber a quién responder.');
+      setError(t.contact.errorName);
       return;
     }
     if (trimmedMessage.length < LIMITS.message[0]) {
-      setError('El mensaje debe tener al menos 10 caracteres.');
+      setError(t.contact.errorMessage);
       return;
     }
     setError(null);
     window.location.href = buildMailto(
       profile.email,
-      `Contacto desde tu portafolio: ${trimmedName}`,
+      t.contact.subject(trimmedName),
       `${trimmedMessage}\n\n${trimmedName}`,
     );
   };
@@ -37,7 +39,7 @@ export function ContactForm() {
   return (
     <form className={`card ${styles.form}`} onSubmit={onSubmit} noValidate>
       <div className={styles.field}>
-        <label htmlFor="contact-name">Nombre</label>
+        <label htmlFor="contact-name">{t.contact.name}</label>
         <input
           id="contact-name"
           name="name"
@@ -48,7 +50,7 @@ export function ContactForm() {
         />
       </div>
       <div className={styles.field}>
-        <label htmlFor="contact-message">Mensaje</label>
+        <label htmlFor="contact-message">{t.contact.message}</label>
         <textarea
           id="contact-message"
           name="message"
@@ -66,11 +68,9 @@ export function ContactForm() {
         {error}
       </p>
       <button type="submit" className={styles.submit}>
-        Abrir en mi correo
+        {t.contact.submit}
       </button>
-      <p className={styles.note}>
-        Se abrirá tu aplicación de correo con el mensaje listo para enviar a {profile.email}.
-      </p>
+      <p className={styles.note}>{t.contact.note(profile.email)}</p>
     </form>
   );
 }

@@ -2,6 +2,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { useTheme } from '@/hooks/useTheme';
+import { LanguageProvider } from '@/i18n/LanguageProvider';
 import { About } from '@/sections/About';
 import { Contact } from '@/sections/Contact';
 import { Experience } from '@/sections/Experience';
@@ -10,7 +11,7 @@ import { Lab } from '@/sections/Lab';
 import { Projects } from '@/sections/Projects';
 import { Skills } from '@/sections/Skills';
 
-export function App() {
+function Page() {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -28,5 +29,13 @@ export function App() {
       </main>
       <Footer />
     </>
+  );
+}
+
+export function App() {
+  return (
+    <LanguageProvider>
+      <Page />
+    </LanguageProvider>
   );
 }

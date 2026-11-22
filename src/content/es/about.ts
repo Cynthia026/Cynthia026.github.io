@@ -1,4 +1,4 @@
-import type { AboutFact, Tech } from '@/types/content';
+import type { AboutFact, StackComponent } from '@/types/content';
 
 /** Ficha técnica de la sección «Perfil». */
 export const aboutFacts: AboutFact[] = [
@@ -18,15 +18,12 @@ export const aboutFacts: AboutFact[] = [
     value: 'Español nativo',
     detail: 'Inglés intermedio (B1), lectura técnica y redacción',
   },
-  { label: 'Certificación', value: 'Cloud Foundations', detail: 'Insignia de AWS Educate' },
+  {
+    label: 'Certificaciones',
+    value: 'Cisco, AWS Educate y TecNM',
+    detail: 'Network Defense, Python Essentials 1 y Cloud Foundations',
+  },
 ];
-
-export interface StackComponent {
-  name: string;
-  kind: 'Lenguaje' | 'Interfaz' | 'Gráficos' | 'Backend' | 'Datos' | 'Nube';
-  /** Tecnologías de los proyectos que cuentan como uso de este componente. */
-  matches: Tech[];
-}
 
 /** «Lista de componentes» del stack, en el orden en que se muestra. */
 export const coreStack: StackComponent[] = [

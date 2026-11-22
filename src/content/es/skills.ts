@@ -52,10 +52,6 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
-    name: 'Certificación',
-    items: ['Cloud Foundations, insignia de AWS Educate'],
-  },
-  {
     name: 'Idiomas',
     items: ['Español: nativo', 'Inglés: intermedio (B1), lectura técnica y redacción'],
   },

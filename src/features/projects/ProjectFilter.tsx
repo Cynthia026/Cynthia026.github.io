@@ -1,5 +1,6 @@
 import { ALL, type TechFilter } from './filterProjects';
 import type { Tech } from '@/types/content';
+import { useLanguage } from '@/i18n/useLanguage';
 import styles from './ProjectFilter.module.css';
 
 interface ProjectFilterProps {
@@ -9,8 +10,9 @@ interface ProjectFilterProps {
 }
 
 export function ProjectFilter({ options, value, onChange }: ProjectFilterProps) {
+  const { t } = useLanguage();
   return (
-    <div role="group" aria-label="Filtrar proyectos por tecnología" className={styles.group}>
+    <div role="group" aria-label={t.projects.filterLabel} className={styles.group}>
       {[ALL, ...options].map((option) => (
         <button
           key={option}
@@ -19,7 +21,7 @@ export function ProjectFilter({ options, value, onChange }: ProjectFilterProps) 
           aria-pressed={value === option}
           onClick={() => onChange(option)}
         >
-          {option}
+          {option === ALL ? t.projects.all : option}
         </button>
       ))}
     </div>

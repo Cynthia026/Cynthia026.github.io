@@ -1,20 +1,13 @@
-import { profile, projects } from '@/content';
 import { Button } from '@/components/ui/Button';
 import { ContactList } from '@/components/ui/ContactList';
 import { DownloadIcon } from '@/components/ui/icons';
+import { useLanguage } from '@/i18n/useLanguage';
 import { asset } from '@/lib/asset';
 import styles from './Hero.module.css';
 
-/** Datos del cajetín: el recuadro de identificación de un plano técnico. */
-const TITLE_BLOCK = [
-  { label: 'Autora', value: profile.name },
-  { label: 'Especialidad', value: profile.role.replace('Desarrolladora ', '') },
-  { label: 'Formación', value: 'Ing. en Sistemas Computacionales, TecNM Pachuca' },
-  { label: 'Ubicación', value: profile.location.replace(', México', '') },
-  { label: 'Estado', value: 'Disponible para prácticas' },
-];
-
 export function Hero() {
+  const { c, t } = useLanguage();
+  const { profile, projects } = c;
   const [first, ...rest] = profile.name.split(' ');
   const featured = projects.find((p) => p.image && p.callouts) ?? projects[0];
 
@@ -22,7 +15,7 @@ export function Hero() {
     <section id="inicio" aria-labelledby="hero-title" className={`grid-paper ${styles.hero}`}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.text}>
-          <p className={styles.kicker}>Portafolio técnico, revisión 2026</p>
+          <p className={styles.kicker}>{t.hero.kicker}</p>
           <h1 id="hero-title" className={styles.name}>
             {first} <span className={styles.last}>{rest.join(' ')}</span>
           </h1>
@@ -30,11 +23,11 @@ export function Hero() {
           <p className={styles.headline}>{profile.headline}</p>
 
           <div className={styles.ctas}>
-            <Button href="#proyectos">Ver proyectos</Button>
+            <Button href="#proyectos">{t.hero.seeProjects}</Button>
             {profile.cvUrl && (
               <Button href={profile.cvUrl} variant="secondary" download>
                 <DownloadIcon />
-                Descargar CV
+                {t.hero.downloadCv}
               </Button>
             )}
           </div>
@@ -47,7 +40,7 @@ export function Hero() {
             <a href={`#${featured.slug}`} className={styles.drawing}>
               <img
                 src={asset(featured.image)}
-                alt={`Captura de ${featured.title}`}
+                alt={`${t.hero.screenshotOf} ${featured.title}`}
                 width={800}
                 height={500}
                 fetchPriority="high"
@@ -65,7 +58,7 @@ export function Hero() {
             </a>
             <figcaption className={styles.caption}>
               <p className={styles.figTitle}>
-                <span className={styles.figNumber}>Fig. 1</span>
+                <span className={styles.figNumber}>{t.hero.figure} 1</span>
                 {featured.title.split(':')[0]}
               </p>
               {featured.callouts && (
@@ -82,7 +75,7 @@ export function Hero() {
 
       <div className="container">
         <dl className={styles.titleBlock}>
-          {TITLE_BLOCK.map((cell) => (
+          {c.titleBlock.map((cell) => (
             <div key={cell.label} className={styles.cell}>
               <dt>{cell.label}</dt>
               <dd>{cell.value}</dd>

@@ -27,3 +27,96 @@
   padding-block-end: var(--space-2);
   border-bottom: 1px dashed var(--color-line);
 }
+
+.certs {
+  margin-block-start: var(--space-12);
+}
+
+.tableTitle {
+  margin-block-end: var(--space-3);
+  font: 500 var(--step--1) / 1.3 var(--font-mono);
+  color: var(--color-accent);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1.5px solid var(--color-ink);
+}
+
+.table th,
+.table td {
+  padding: var(--space-4) var(--space-4) var(--space-4) 0;
+  border-bottom: 1px solid var(--color-line);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table thead th {
+  padding-block: var(--space-2);
+  font: 500 var(--step--2) / 1.3 var(--font-mono);
+  color: var(--color-muted);
+}
+
+.date {
+  width: 9rem;
+  font: 500 var(--step--1) / 1.6 var(--font-mono);
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.noDate {
+  color: var(--color-muted);
+}
+
+.cert {
+  font-weight: 400;
+}
+
+.certName {
+  display: block;
+  font-weight: 600;
+}
+
+.issuer {
+  display: block;
+  margin-block-start: 2px;
+  font-size: var(--step--1);
+  color: var(--color-muted);
+}
+
+.link {
+  width: 11rem;
+  text-align: end !important;
+}
+
+.link a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+@media (max-width: 40rem) {
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .table th,
+  .table td {
+    padding: 0;
+    border: 0;
+    width: auto;
+    text-align: start !important;
+  }
+}

@@ -1,6 +1,7 @@
-export { profile } from './profile';
-export { projects } from './projects';
-export { lab } from './lab';
-export { experience } from './experience';
-export { skills } from './skills';
-export { aboutFacts, coreStack } from './about';
+import type { Locale } from '@/i18n/locales';
+import type { SiteContent } from '@/types/content';
+import { en } from './en';
+import { es } from './es';
+
+/** Contenido del sitio por idioma. */
+export const content: Record<Locale, SiteContent> = { es, en };

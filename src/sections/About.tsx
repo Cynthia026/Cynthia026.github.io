@@ -1,26 +1,24 @@
-import { aboutFacts, coreStack, profile, projects } from '@/content';
 import { Section } from '@/components/layout/Section';
+import { useLanguage } from '@/i18n/useLanguage';
 import { asset } from '@/lib/asset';
+import type { Project } from '@/types/content';
 import styles from './About.module.css';
 
-function countProjects(matches: readonly string[]): number {
+function countProjects(projects: readonly Project[], matches: readonly string[]): number {
   return projects.filter((p) => p.stack.some((tech) => matches.includes(tech))).length;
 }
 
 export function About() {
+  const { c, t } = useLanguage();
+  const { profile, aboutFacts, coreStack, projects } = c;
   return (
-    <Section
-      id="sobre-mi"
-      number={1}
-      title="Perfil"
-      intro="Quién soy, dónde me formo y con qué componentes construyo mis proyectos."
-    >
+    <Section id="sobre-mi" number={1} title={t.about.title} intro={t.about.intro}>
       <div className={styles.layout}>
         <div className={styles.profile}>
           {profile.photo && (
             <img
               src={asset(profile.photo)}
-              alt={`Foto de ${profile.name}`}
+              alt={`${t.about.photoOf} ${profile.name}`}
               className={styles.photo}
               width={160}
               height={160}
@@ -34,7 +32,7 @@ export function About() {
         </div>
 
         <div className={styles.sheet}>
-          <h3 className={styles.tableTitle}>Ficha técnica</h3>
+          <h3 className={styles.tableTitle}>{t.about.sheet}</h3>
           <dl className={styles.facts}>
             {aboutFacts.map((fact) => (
               <div key={fact.label} className={styles.factRow}>
@@ -50,20 +48,20 @@ export function About() {
       </div>
 
       <div className={styles.bom}>
-        <h3 className={styles.tableTitle}>Lista de componentes</h3>
+        <h3 className={styles.tableTitle}>{t.about.bom}</h3>
         <table className={styles.table}>
           <thead>
             <tr>
-              <th scope="col">Componente</th>
-              <th scope="col">Tipo</th>
+              <th scope="col">{t.about.component}</th>
+              <th scope="col">{t.about.kind}</th>
               <th scope="col" className={styles.num}>
-                Proyectos que lo usan
+                {t.about.usedIn}
               </th>
             </tr>
           </thead>
           <tbody>
             {coreStack.map((item) => {
-              const count = countProjects(item.matches);
+              const count = countProjects(projects, item.matches);
               return (
                 <tr key={item.name}>
                   <th scope="row">{item.name}</th>
@@ -77,7 +75,7 @@ export function About() {
                         />
                       </span>
                       <span className={styles.count}>
-                        {count} de {projects.length}
+                        {count} {t.about.of} {projects.length}
                       </span>
                     </div>
                   </td>

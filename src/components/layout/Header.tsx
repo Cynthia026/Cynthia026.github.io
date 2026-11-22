@@ -1,18 +1,20 @@
-import { profile } from '@/content';
 import { MoonIcon, SunIcon } from '@/components/ui/icons';
+import { LanguageSwitch } from '@/components/ui/LanguageSwitch';
 import { ToggleButton } from '@/components/ui/ToggleButton';
+import { useLanguage } from '@/i18n/useLanguage';
+import type { UiStrings } from '@/i18n/ui';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import type { Theme } from '@/hooks/useTheme';
 import styles from './Header.module.css';
 
-const NAV_ITEMS = [
-  { id: 'sobre-mi', label: 'Perfil' },
-  { id: 'proyectos', label: 'Proyectos' },
-  { id: 'laboratorio', label: 'Laboratorio' },
-  { id: 'trayectoria', label: 'Trayectoria' },
-  { id: 'habilidades', label: 'Habilidades' },
-  { id: 'contacto', label: 'Contacto' },
-] as const;
+const NAV_ITEMS: { id: string; key: keyof UiStrings['nav'] }[] = [
+  { id: 'sobre-mi', key: 'profile' },
+  { id: 'proyectos', key: 'projects' },
+  { id: 'laboratorio', key: 'lab' },
+  { id: 'trayectoria', key: 'experience' },
+  { id: 'habilidades', key: 'skills' },
+  { id: 'contacto', key: 'contact' },
+];
 
 // «inicio» se observa para limpiar el resaltado al volver arriba.
 const SECTION_IDS = ['inicio', ...NAV_ITEMS.map((item) => item.id)];
@@ -28,6 +30,7 @@ function initials(name: string): string {
 }
 
 export function Header({ theme, onToggleTheme }: HeaderProps) {
+  const { c, t } = useLanguage();
   const active = useActiveSection(SECTION_IDS);
 
   return (
@@ -35,12 +38,12 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
       <div className={`container ${styles.inner}`}>
         <a href="#inicio" className={styles.brand}>
           <span className={styles.monogram} aria-hidden="true">
-            {initials(profile.name)}
+            {initials(c.profile.name)}
           </span>
-          <span className={styles.brandName}>{profile.name}</span>
+          <span className={styles.brandName}>{c.profile.name}</span>
         </a>
 
-        <nav aria-label="Secciones" className={styles.nav}>
+        <nav aria-label={t.a11y.sections} className={styles.nav}>
           <ul role="list" className={styles.list}>
             {NAV_ITEMS.map((item, index) => (
               <li key={item.id}>
@@ -49,7 +52,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
                   className={styles.link}
                   aria-current={active === item.id ? 'location' : undefined}
                 >
-                  <span className={styles.linkNumber}>{index + 1}.</span> {item.label}
+                  <span className={styles.linkNumber}>{index + 1}.</span> {t.nav[item.key]}
                 </a>
               </li>
             ))}
@@ -57,10 +60,11 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
         </nav>
 
         <div className={styles.actions}>
+          <LanguageSwitch />
           <ToggleButton
             pressed={theme === 'dark'}
             onToggle={onToggleTheme}
-            label="Modo oscuro"
+            label={t.a11y.darkMode}
             icon={theme === 'dark' ? <MoonIcon /> : <SunIcon />}
           />
         </div>

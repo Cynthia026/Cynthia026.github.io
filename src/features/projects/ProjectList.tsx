@@ -3,12 +3,14 @@ import type { Project } from '@/types/content';
 import { ALL, filterProjects, getTechOptions, type TechFilter } from './filterProjects';
 import { ProjectFilter } from './ProjectFilter';
 import { ProjectCard } from './ProjectCard';
+import { useLanguage } from '@/i18n/useLanguage';
 import styles from './ProjectList.module.css';
 
 /** Solo se ofrecen como filtro las tecnologías más usadas. */
 const MAX_FILTERS = 8;
 
 export function ProjectList({ projects }: { projects: readonly Project[] }) {
+  const { t } = useLanguage();
   const [filter, setFilter] = useState<TechFilter>(ALL);
   const options = useMemo(() => getTechOptions(projects, MAX_FILTERS), [projects]);
   const visible = useMemo(() => filterProjects(projects, filter), [projects, filter]);
@@ -20,7 +22,7 @@ export function ProjectList({ projects }: { projects: readonly Project[] }) {
       <div className={styles.toolbar}>
         <ProjectFilter options={options} value={filter} onChange={setFilter} />
         <p className={styles.count} aria-live="polite">
-          {visible.length} de {projects.length} proyectos
+          {t.projects.count(visible.length, projects.length)}
         </p>
       </div>
 
@@ -37,9 +39,9 @@ export function ProjectList({ projects }: { projects: readonly Project[] }) {
         </div>
       ) : (
         <p className={styles.empty}>
-          Ningún proyecto usa esa tecnología todavía.{' '}
+          {t.projects.empty}{' '}
           <button type="button" onClick={() => setFilter(ALL)}>
-            Ver todos los proyectos
+            {t.projects.showAll}
           </button>
         </p>
       )}
