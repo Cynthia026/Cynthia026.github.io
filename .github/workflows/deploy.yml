@@ -26,9 +26,21 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
+      # Si el repo se llama <usuario>.github.io el sitio vive en la raíz;
+      # en cualquier otro repo vive en /<nombre-del-repo>/.
+      - name: Calcular ruta base
+        id: base
+        run: |
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          if [ "${repo,,}" = "${owner}.github.io" ]; then
+            echo "path=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=/${repo}/" >> "$GITHUB_OUTPUT"
+          fi
       - run: npm run build
         env:
-          BASE_PATH: /${{ github.event.repository.name }}/
+          BASE_PATH: ${{ steps.base.outputs.path }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

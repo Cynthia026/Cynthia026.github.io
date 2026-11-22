@@ -67,8 +67,8 @@ Pulsa la tecla **i** (o «Ver estructura») para mostrar la retícula de 12 colu
 
 ## Publicar en GitHub Pages
 
-1. Sube el proyecto a un repositorio en GitHub (rama `main`).
+1. El repositorio debe llamarse `<usuario>.github.io` para que el sitio quede en `https://<usuario>.github.io/`. Con cualquier otro nombre queda en `https://<usuario>.github.io/<repositorio>/`; el workflow detecta la ruta solo.
 2. En el repositorio: **Settings → Pages → Source: GitHub Actions**.
-3. Cada `push` a `main` ejecuta lint, pruebas y build, y publica en `https://<usuario>.github.io/<repositorio>/`.
+3. Cada `push` a `main` ejecuta lint, pruebas y build, y publica el sitio.
 
 El workflow está en `.github/workflows/deploy.yml`. También funciona en Vercel o Netlify sin configuración (comando `npm run build`, carpeta `dist`).
