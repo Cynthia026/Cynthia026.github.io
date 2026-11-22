@@ -120,3 +120,8 @@ footer {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Las secciones reciben foco al navegar desde el menú; sin contorno porque no son controles */
+[tabindex='-1']:focus {
+  outline: none;
+}

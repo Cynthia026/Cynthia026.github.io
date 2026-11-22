@@ -1,6 +1,7 @@
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { SkipLink } from '@/components/layout/SkipLink';
+import { useCleanAnchors } from '@/hooks/useCleanAnchors';
 import { useTheme } from '@/hooks/useTheme';
 import { LanguageProvider } from '@/i18n/LanguageProvider';
 import { About } from '@/sections/About';
@@ -13,6 +14,7 @@ import { Skills } from '@/sections/Skills';
 
 function Page() {
   const { theme, toggleTheme } = useTheme();
+  useCleanAnchors();
 
   return (
     <>

@@ -48,6 +48,16 @@ describe('App', () => {
   });
 });
 
+describe('Enlaces internos', () => {
+  it('bajan a la sección sin agregar #seccion a la URL', () => {
+    render(<App />);
+    Element.prototype.scrollIntoView = vi.fn();
+    fireEvent.click(screen.getByRole('link', { name: /contacto/i }));
+    expect(window.location.hash).toBe('');
+    expect(document.getElementById('contacto')).toHaveFocus();
+  });
+});
+
 describe('Idioma', () => {
   it('cambia a inglés y lo refleja en la URL y en <html lang>', () => {
     render(<App />);
