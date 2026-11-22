@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cynthia Martínez García · Desarrolladora Frontend e IoT</title>
+    <meta
+      name="description"
+      content="Portafolio de Cynthia Martínez García, desarrolladora en Pachuca, Hidalgo: proyectos de desarrollo frontend con JavaScript, Three.js, WebXR y APIs del navegador."
+    />
+    <meta name="theme-color" content="#E9EDF3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#11162A" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Cynthia Martínez García · Desarrolladora Frontend e IoT" />
+    <meta
+      property="og:description"
+      content="Proyectos destacados: gemelo digital 3D con realidad virtual, plataformas educativas y sistemas web full stack."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Aplica el tema guardado antes del primer pintado para evitar parpadeo.
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

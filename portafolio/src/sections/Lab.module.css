@@ -1,0 +1,40 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 0 var(--space-6);
+}
+
+.item {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.title {
+  font-size: var(--step-1);
+}
+
+.title a {
+  text-decoration: none;
+}
+
+.title a:hover {
+  text-decoration: underline;
+}
+
+.description {
+  color: var(--color-muted);
+}
+
+.meta {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--step--1);
+}
+
+.meta span:first-child {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}

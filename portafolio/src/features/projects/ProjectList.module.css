@@ -1,0 +1,27 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-block-end: var(--space-12);
+}
+
+.count {
+  font-size: var(--step--1);
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.list {
+  display: grid;
+}
+
+.empty button {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--color-accent);
+  text-decoration: underline;
+  cursor: pointer;
+}

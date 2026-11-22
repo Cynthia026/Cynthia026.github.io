@@ -1,0 +1,91 @@
+@import '@fontsource-variable/bricolage-grotesque/wdth.css';
+@import '@fontsource-variable/jetbrains-mono';
+@import './tokens.css';
+@import './reset.css';
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-variation-settings: 'opsz' 14;
+  line-height: 1.55;
+  transition:
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Modo inspección: muestra la estructura de componentes de la página.
+   Se activa con <html data-inspect>. Cada componente declara data-component.
+   ========================================================================== */
+html[data-inspect] [data-component] {
+  position: relative;
+  outline: 1px dashed var(--inspect-line);
+  outline-offset: -1px;
+  background-image: linear-gradient(var(--inspect-content), var(--inspect-content));
+}
+
+html[data-inspect] [data-component]::before {
+  content: '<' attr(data-component) ' />';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 5;
+  padding: 1px 6px;
+  font: 500 11px/1.5 var(--font-mono);
+  color: var(--inspect-label-ink);
+  background: var(--inspect-label-bg);
+  border-end-end-radius: var(--radius-s);
+  pointer-events: none;
+}

@@ -1,0 +1,14 @@
+.skip {
+  position: absolute;
+  inset-inline-start: var(--space-4);
+  inset-block-start: -4rem;
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-ink);
+  color: var(--color-bg);
+  border-radius: var(--radius-s);
+}
+
+.skip:focus {
+  inset-block-start: var(--space-4);
+}

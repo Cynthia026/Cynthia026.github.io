@@ -1,0 +1,29 @@
+.address {
+  font-style: normal;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-8);
+}
+
+.list li {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.label {
+  font-size: var(--step--1);
+  color: var(--color-muted);
+}
+
+.list a {
+  font-weight: 550;
+  text-decoration-color: var(--color-line);
+  overflow-wrap: anywhere;
+}
+
+.list a:hover {
+  text-decoration-color: currentColor;
+}

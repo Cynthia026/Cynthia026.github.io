@@ -1,0 +1,23 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-8) var(--space-6);
+}
+
+.group {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  padding-block-start: var(--space-4);
+  border-top: 2px solid var(--color-ink);
+}
+
+.name {
+  font-size: var(--step-0);
+}
+
+.items {
+  display: grid;
+  gap: var(--space-1);
+  color: var(--color-muted);
+}

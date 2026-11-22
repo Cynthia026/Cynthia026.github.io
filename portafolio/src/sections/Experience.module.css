@@ -1,0 +1,50 @@
+.timeline {
+  display: grid;
+}
+
+.item {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.period {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.body {
+  display: grid;
+  gap: var(--space-1);
+  max-width: var(--measure);
+}
+
+.title {
+  font-size: var(--step-1);
+}
+
+.place {
+  color: var(--color-accent);
+  font-weight: 520;
+}
+
+.description {
+  color: var(--color-muted);
+  margin-block-start: var(--space-2);
+}
+
+@media (min-width: 56rem) {
+  .item {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-6);
+  }
+
+  .period {
+    grid-column: 1 / span 3;
+  }
+
+  .body {
+    grid-column: 7 / -1;
+  }
+}

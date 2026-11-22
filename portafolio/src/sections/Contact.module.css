@@ -1,0 +1,47 @@
+.wrap {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.email {
+  font-size: var(--step-3);
+  font-weight: 650;
+  font-variation-settings: 'wdth' 80;
+  letter-spacing: -0.02em;
+  text-decoration-thickness: 2px;
+  overflow-wrap: anywhere;
+}
+
+.phone {
+  font-size: var(--step-2);
+  font-weight: 560;
+  font-variant-numeric: tabular-nums;
+  text-decoration-thickness: 1px;
+  margin-block-start: calc(-1 * var(--space-3));
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-8);
+}
+
+.copy {
+  padding: 0.5em 1em;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-s);
+  background: transparent;
+  cursor: pointer;
+  min-width: 10rem;
+}
+
+.copy:hover {
+  border-color: var(--color-ink);
+}
+
+.links {
+  display: flex;
+  gap: var(--space-6);
+  font-weight: 560;
+}
