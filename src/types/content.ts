@@ -107,7 +107,7 @@ export interface LabItem {
   repoUrl: string;
 }
 
-export type ExperienceKind = 'education' | 'project' | 'work';
+export type ExperienceKind = 'education' | 'project' | 'work' | 'event';
 
 export interface ExperienceItem {
   kind: ExperienceKind;
@@ -116,6 +116,8 @@ export interface ExperienceItem {
   place: string;
   description: string;
   tags?: string[];
+  /** Constancia o evidencia en /public (p. ej. `certificados/x.pdf`). */
+  evidence?: string;
 }
 
 export interface SkillGroup {
@@ -128,8 +130,10 @@ export interface Certification {
   issuer: string;
   /** Fecha ISO (AAAA-MM-DD); se formatea según el idioma. */
   date?: string;
-  /** Archivo en /public (p. ej. `certificados/x.pdf`) o enlace de verificación. */
+  /** Archivo en /public (p. ej. `certificados/x.pdf`). */
   url?: string;
+  /** Página pública de verificación (p. ej. la insignia en Credly). */
+  verifyUrl?: string;
 }
 
 /** Celda del cajetín (recuadro de datos del inicio). */

@@ -78,10 +78,13 @@ const es = {
   experience: {
     title: 'Trayectoria',
     intro: 'Mi formación y cómo ha crecido mi trabajo, de lo más reciente a lo más antiguo.',
-    kinds: { education: 'Educación', project: 'Proyecto', work: 'Trabajo' } satisfies Record<
-      ExperienceKind,
-      string
-    >,
+    evidence: 'Ver constancia',
+    kinds: {
+      education: 'Educación',
+      project: 'Proyecto',
+      work: 'Trabajo',
+      event: 'Concurso',
+    } satisfies Record<ExperienceKind, string>,
   },
   skills: {
     title: 'Habilidades y certificaciones',
@@ -93,6 +96,7 @@ const es = {
     issuer: 'Emisor',
     noDate: 'Sin fecha',
     view: 'Ver certificado',
+    verify: 'Verificar en Credly',
   },
   contact: {
     title: 'Contacto',
@@ -193,7 +197,8 @@ const en: UiStrings = {
   experience: {
     title: 'Background',
     intro: 'My education and how my work has grown, from most recent to oldest.',
-    kinds: { education: 'Education', project: 'Project', work: 'Work' },
+    evidence: 'View certificate',
+    kinds: { education: 'Education', project: 'Project', work: 'Work', event: 'Competition' },
   },
   skills: {
     title: 'Skills and certifications',
@@ -204,6 +209,7 @@ const en: UiStrings = {
     issuer: 'Issuer',
     noDate: 'No date',
     view: 'View certificate',
+    verify: 'Verify on Credly',
   },
   contact: {
     title: 'Contact',

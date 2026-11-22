@@ -52,7 +52,7 @@ const labText: Record<string, { title: string; description: string }> = {
   },
   ECOLIDERES: {
     title: 'Ecolíderes',
-    description: 'Informational site for an environmental group, with a gallery and video.',
+    description: 'Website for the Eco Líderes project, which I entered in InnovaTecNM 2025.',
   },
 };
 
@@ -79,6 +79,13 @@ const experienceText = [
       'Multi-role applications connected to my own Spring Boot and Node.js APIs, plus Angular 21 exercises.',
   },
   {
+    period: 'May 2025',
+    title: 'InnovaTecNM 2025, local stage',
+    place: 'Instituto Tecnológico de Pachuca',
+    description:
+      'Competed with the Eco Líderes project in the “Sustainability and Climate Change” category of the National Summit for Technology Development, Entrepreneurship, and Innovation.',
+  },
+  {
     period: 'Feb — May 2025',
     title: 'Computer graphics and logic programming',
     place: 'Academic projects',
@@ -88,6 +95,14 @@ const experienceText = [
 ];
 
 const certificationNames: Record<string, { name: string; issuer: string }> = {
+  'Fundamentos de Ciberseguridad': {
+    name: 'Cybersecurity Fundamentals',
+    issuer: 'Cisco Networking Academy, taught by Instituto Tecnológico de Pachuca',
+  },
+  'Introducción a Cisco Packet Tracer': {
+    name: 'Getting Started with Cisco Packet Tracer',
+    issuer: 'Cisco Networking Academy',
+  },
   'Con Educación Financiera: Construye tu Futuro Financiero (MOOC)': {
     name: 'Financial Education: Build Your Financial Future (MOOC, in Spanish)',
     issuer: 'TecNM and CONDUSEF',
@@ -133,8 +148,8 @@ export const en: SiteContent = {
     },
     {
       label: 'Certifications',
-      value: 'Cisco, AWS Educate, and TecNM',
-      detail: 'Network Defense, Python Essentials 1, and Cloud Foundations',
+      value: 'Cisco Networking Academy, AWS Educate, and TecNM',
+      detail: 'Cybersecurity, network defense, Packet Tracer, Python, and cloud',
     },
   ],
   coreStack: esStack.map((item) => ({
@@ -191,6 +206,7 @@ export const en: SiteContent = {
         'Vercel and GitHub Pages',
         'IPv4, IPv6, and VLSM',
         'Cisco Packet Tracer',
+        'Cybersecurity and network defense fundamentals',
         'Microcontrollers, sensors, and telemetry',
       ],
     },

@@ -86,12 +86,13 @@
 }
 
 .link {
-  width: 11rem;
+  width: 12rem;
   text-align: end !important;
 }
 
 .link a {
-  display: inline-flex;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: var(--space-1);
   font-size: var(--step--1);
@@ -100,7 +101,15 @@
   white-space: nowrap;
 }
 
+.link a + a {
+  margin-block-start: var(--space-2);
+}
+
 @media (max-width: 40rem) {
+  .link a {
+    justify-content: flex-start;
+  }
+
   .table thead {
     display: none;
   }

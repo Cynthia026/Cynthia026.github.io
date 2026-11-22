@@ -39,6 +39,7 @@ export const skills: SkillGroup[] = [
       'Vercel y GitHub Pages',
       'IPv4, IPv6 y VLSM',
       'Cisco Packet Tracer',
+      'Fundamentos de ciberseguridad y defensa de redes',
       'Microcontroladores, sensores y telemetría',
     ],
   },

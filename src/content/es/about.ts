@@ -20,8 +20,8 @@ export const aboutFacts: AboutFact[] = [
   },
   {
     label: 'Certificaciones',
-    value: 'Cisco, AWS Educate y TecNM',
-    detail: 'Network Defense, Python Essentials 1 y Cloud Foundations',
+    value: 'Cisco Networking Academy, AWS Educate y TecNM',
+    detail: 'Ciberseguridad, defensa de redes, Packet Tracer, Python y nube',
   },
 ];
 

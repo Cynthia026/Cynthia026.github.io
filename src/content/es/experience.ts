@@ -29,6 +29,15 @@ export const experience: ExperienceItem[] = [
     tags: ['Spring Boot', 'Node.js', 'Angular'],
   },
   {
+    kind: 'event',
+    period: 'Mayo 2025',
+    title: 'InnovaTecNM 2025, etapa local',
+    place: 'Instituto Tecnológico de Pachuca',
+    description:
+      'Concursé con el proyecto Eco Líderes en la categoría «Sostenibilidad y Cambio Climático» de la Cumbre Nacional de Desarrollo Tecnológico, Emprendimiento e Innovación.',
+    evidence: 'certificados/innovatecnm-2025-eco-lideres.pdf',
+  },
+  {
     kind: 'project',
     period: 'Feb — may 2025',
     title: 'Graficación y programación lógica',

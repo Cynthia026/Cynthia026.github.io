@@ -55,6 +55,15 @@ export function Skills() {
                   <span className={styles.issuer}>{cert.issuer}</span>
                 </th>
                 <td className={styles.link}>
+                  {cert.verifyUrl && (
+                    <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer">
+                      {t.skills.verify} <ExternalIcon />
+                      <span className="visually-hidden">
+                        {' '}
+                        {cert.name} {t.a11y.newTab}
+                      </span>
+                    </a>
+                  )}
                   {cert.url && (
                     <a
                       href={/^https?:/.test(cert.url) ? cert.url : asset(cert.url)}

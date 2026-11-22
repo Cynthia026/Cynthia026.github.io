@@ -35,7 +35,7 @@ export const lab: LabItem[] = [
   {
     title: 'Ecolíderes',
     year: 2025,
-    description: 'Sitio informativo para un grupo ambiental, con galería y video.',
+    description: 'Sitio web del proyecto Eco Líderes, con el que concursé en InnovaTecNM 2025.',
     stack: ['HTML', 'CSS'],
     repoUrl: `${GH}/ECOLIDERES`,
   },

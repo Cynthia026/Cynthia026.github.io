@@ -36,8 +36,20 @@
   color: var(--color-accent);
 }
 
-.work {
+.work,
+.event {
   color: var(--color-note);
+}
+
+.evidence {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  justify-self: start;
+  margin-block-start: var(--space-3);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--color-accent);
 }
 
 .what {
