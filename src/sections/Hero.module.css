@@ -1,6 +1,17 @@
 .hero {
   position: relative;
   padding-block: var(--space-12) var(--space-12);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* La retícula se desvanece hacia abajo para no competir con el contenido */
+.hero::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 70% 0 0;
+  background: linear-gradient(transparent, var(--color-bg));
+  pointer-events: none;
 }
 
 .grid,

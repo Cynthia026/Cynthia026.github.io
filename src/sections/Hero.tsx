@@ -1,3 +1,4 @@
+import { CircuitBackground } from '@/components/effects/CircuitBackground';
 import { Button } from '@/components/ui/Button';
 import { ContactList } from '@/components/ui/ContactList';
 import { DownloadIcon } from '@/components/ui/icons';
@@ -14,7 +15,8 @@ export function Hero() {
   const featured = projects.find((p) => p.image && p.callouts) ?? projects[0];
 
   return (
-    <section id="inicio" aria-labelledby="hero-title" className={styles.hero}>
+    <section id="inicio" aria-labelledby="hero-title" className={`grid-paper ${styles.hero}`}>
+      <CircuitBackground />
       <div className={`container ${styles.grid}`}>
         <div className={styles.text}>
           <p className={styles.kicker}>{t.hero.kicker}</p>

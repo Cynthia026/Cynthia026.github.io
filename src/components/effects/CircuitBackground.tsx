@@ -3,18 +3,13 @@ import { distanceToTrace, generateTraces, pointAt, type Point, type Trace } from
 import styles from './CircuitBackground.module.css';
 
 const GRID = 40;
-const HOVER_RADIUS = 220;
-const PULSE_SPEED = 0.26; // px por milisegundo
-const PULSE_EVERY = 260; // ms entre señales automáticas
-const MAX_PULSES = 60;
-/** Ancho de la columna de contenido (coincide con --container). */
-const CONTENT_WIDTH = 74 * 16;
+const PULSE_SPEED = 0.22; // px por milisegundo
+const PULSE_EVERY = 650; // ms entre señales automáticas
 
 interface Pulse {
   trace: Trace;
   d: number;
   dir: 1 | -1;
-  color: 'signal' | 'active';
 }
 
 interface Ring {
@@ -42,23 +37,21 @@ function readPalette(): Palette {
 }
 
 /**
- * Fondo de circuito impreso fijo detrás de toda la página.
- * - Pistas con señales que viajan solas, con brillo.
- * - El cursor ilumina las pistas cercanas y muestra una sonda con la coordenada de la retícula.
- * - Un clic en un espacio vacío dispara pulsos desde ese punto.
- * - En la columna de texto el circuito es más tenue para no afectar la lectura.
- * - Respeta «reducir movimiento» (dibujo estático) y se pausa con la pestaña oculta.
+ * Fondo interactivo con pistas de circuito impreso.
+ * - El cursor muestra una sonda con la coordenada de la retícula.
+ * - Un clic dispara pulsos de señal desde ese punto.
+ * - Respeta «reducir movimiento» (dibujo estático) y se pausa fuera de pantalla.
  */
 export function CircuitBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const host = canvas?.parentElement;
     const ctx = canvas?.getContext('2d');
-    if (!canvas || !ctx) return;
+    if (!canvas || !host || !ctx) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const finePointer = window.matchMedia('(pointer: fine)');
     let palette = readPalette();
     let width = 0;
     let height = 0;
@@ -66,29 +59,26 @@ export function CircuitBackground() {
     let pulses: Pulse[] = [];
     let rings: Ring[] = [];
     let pointer: Point | null = null;
+    let visible = true;
     let frame = 0;
     let last = performance.now();
     let sinceSpawn = 0;
 
     const resize = () => {
+      const rect = host.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
+      width = rect.width;
+      height = rect.height;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      traces = generateTraces(width, height, GRID, 11);
+      traces = generateTraces(width, height, GRID);
       pulses = [];
       draw();
     };
 
-    /** 1 en los márgenes laterales, más tenue sobre la columna de contenido. */
-    const fade = (x: number) => {
-      const half = Math.min(CONTENT_WIDTH, width) / 2;
-      const fromCenter = Math.abs(x - width / 2);
-      const t = Math.min(1, Math.max(0, (fromCenter - half * 0.55) / (half * 0.6)));
-      return 0.38 + 0.62 * t;
-    };
+    /** Más tenue a la izquierda, donde está el texto, para no restarle legibilidad. */
+    const fade = (x: number) => 0.1 + 0.9 * Math.min(1, Math.max(0, (x / width - 0.35) / 0.35));
 
     const spawn = (trace: Trace, from?: Point) => {
       let dir: 1 | -1 = Math.random() < 0.5 ? 1 : -1;
@@ -101,30 +91,22 @@ export function CircuitBackground() {
             ? 1
             : -1;
       }
-      pulses.push({
-        trace,
-        d: dir === 1 ? 0 : trace.total,
-        dir,
-        color: Math.random() < 0.6 ? 'signal' : 'active',
-      });
-      if (pulses.length > MAX_PULSES) pulses.shift();
+      pulses.push({ trace, d: dir === 1 ? 0 : trace.total, dir });
+      if (pulses.length > 40) pulses.shift();
     };
 
-    const strokeTrace = (trace: Trace) => {
+    const drawTrace = (trace: Trace, color: string, alpha: number, lineWidth: number) => {
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lineWidth;
       ctx.beginPath();
       trace.points.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
       ctx.stroke();
-    };
-
-    const drawPads = (trace: Trace, fill: string) => {
+      // Pads en los extremos
       for (const p of [trace.points[0]!, trace.points[trace.points.length - 1]!]) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 3.6, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 3.2, 0, Math.PI * 2);
         ctx.stroke();
-        ctx.fillStyle = fill;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2);
-        ctx.fill();
       }
     };
 
@@ -132,81 +114,54 @@ export function CircuitBackground() {
       ctx!.clearRect(0, 0, width, height);
       ctx!.lineCap = 'round';
       ctx!.lineJoin = 'round';
-      ctx!.shadowBlur = 0;
 
       for (const trace of traces) {
         const mid = trace.points[Math.floor(trace.points.length / 2)]!;
         const f = fade(mid.x);
-        ctx!.globalAlpha = 0.75 * f;
-        ctx!.strokeStyle = palette.trace;
-        ctx!.lineWidth = 1.5;
-        strokeTrace(trace);
-        drawPads(trace, palette.trace);
-
-        if (pointer) {
-          const dist = distanceToTrace(trace, pointer);
-          if (dist < HOVER_RADIUS) {
-            const strength = (1 - dist / HOVER_RADIUS) * Math.max(f, 0.55);
-            ctx!.globalAlpha = strength;
-            ctx!.strokeStyle = palette.active;
-            ctx!.lineWidth = 2.25;
-            ctx!.shadowColor = palette.active;
-            ctx!.shadowBlur = 10;
-            strokeTrace(trace);
-            drawPads(trace, palette.active);
-            ctx!.shadowBlur = 0;
-          }
-        }
+        drawTrace(trace, palette.trace, 0.55 * f, 1.25);
       }
 
-      // Señales con brillo y estela
+      // Señales viajando por las pistas, con estela
       for (const pulse of pulses) {
-        const color = pulse.color === 'signal' ? palette.signal : palette.active;
         const head = pointAt(pulse.trace, pulse.d);
-        const tail = pointAt(pulse.trace, pulse.d - pulse.dir * 34);
-        const f = fade(head.x);
-        const gradient = ctx!.createLinearGradient(tail.x, tail.y, head.x, head.y);
-        gradient.addColorStop(0, 'transparent');
-        gradient.addColorStop(1, color);
-        ctx!.globalAlpha = Math.max(f, 0.4);
-        ctx!.shadowColor = color;
-        ctx!.shadowBlur = 14;
-        ctx!.strokeStyle = gradient;
-        ctx!.lineWidth = 3;
+        const tail = pointAt(pulse.trace, pulse.d - pulse.dir * 26);
+        ctx!.globalAlpha = 0.9;
+        ctx!.strokeStyle = palette.signal;
+        ctx!.lineWidth = 2.5;
         ctx!.beginPath();
         ctx!.moveTo(tail.x, tail.y);
         ctx!.lineTo(head.x, head.y);
         ctx!.stroke();
-        ctx!.fillStyle = color;
+        ctx!.globalAlpha = 1;
+        ctx!.fillStyle = palette.signal;
         ctx!.beginPath();
-        ctx!.arc(head.x, head.y, 3, 0, Math.PI * 2);
+        ctx!.arc(head.x, head.y, 2.6, 0, Math.PI * 2);
         ctx!.fill();
       }
-      ctx!.shadowBlur = 0;
 
       for (const ring of rings) {
-        ctx!.globalAlpha = Math.max(0, 1 - ring.r / 180);
+        ctx!.globalAlpha = Math.max(0, 1 - ring.r / 140);
         ctx!.strokeStyle = palette.active;
-        ctx!.lineWidth = 2;
+        ctx!.lineWidth = 1.5;
         ctx!.beginPath();
         ctx!.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2);
         ctx!.stroke();
       }
 
-      // Sonda en la intersección más cercana de la retícula
+      // Sonda: cruz en la intersección de la retícula más cercana y su coordenada
       if (pointer) {
         const gx = Math.round(pointer.x / GRID);
         const gy = Math.round(pointer.y / GRID);
         const sx = gx * GRID;
         const sy = gy * GRID;
-        ctx!.globalAlpha = Math.max(fade(sx), 0.45);
+        ctx!.globalAlpha = Math.max(fade(sx), 0.35);
         ctx!.strokeStyle = palette.active;
         ctx!.lineWidth = 1;
         ctx!.beginPath();
-        ctx!.moveTo(sx - 12, sy);
-        ctx!.lineTo(sx + 12, sy);
-        ctx!.moveTo(sx, sy - 12);
-        ctx!.lineTo(sx, sy + 12);
+        ctx!.moveTo(sx - 10, sy);
+        ctx!.lineTo(sx + 10, sy);
+        ctx!.moveTo(sx, sy - 10);
+        ctx!.lineTo(sx, sy + 10);
         ctx!.stroke();
         ctx!.strokeRect(sx - 5, sy - 5, 10, 10);
         ctx!.font = `500 11px ${palette.font}`;
@@ -230,16 +185,16 @@ export function CircuitBackground() {
       }
       pulses = pulses.filter((p) => {
         p.d += p.dir * PULSE_SPEED * dt;
-        return p.d >= -40 && p.d <= p.trace.total + 40;
+        return p.d >= -30 && p.d <= p.trace.total + 30;
       });
-      rings = rings.filter((ring) => (ring.r += dt * 0.3) < 180);
+      rings = rings.filter((ring) => (ring.r += dt * 0.25) < 140);
       draw();
       frame = requestAnimationFrame(tick);
     };
 
     const start = () => {
       cancelAnimationFrame(frame);
-      if (reduceMotion.matches || document.hidden) {
+      if (reduceMotion.matches || !visible || document.hidden) {
         draw();
         return;
       }
@@ -247,9 +202,14 @@ export function CircuitBackground() {
       frame = requestAnimationFrame(tick);
     };
 
+    const toLocal = (event: PointerEvent): Point => {
+      const rect = canvas.getBoundingClientRect();
+      return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+    };
+
     const onMove = (event: PointerEvent) => {
-      if (!finePointer.matches || event.pointerType === 'touch') return;
-      pointer = { x: event.clientX, y: event.clientY };
+      if (event.pointerType === 'touch') return;
+      pointer = toLocal(event);
       if (reduceMotion.matches) draw();
     };
     const onLeave = () => {
@@ -257,51 +217,61 @@ export function CircuitBackground() {
       draw();
     };
     const onDown = (event: PointerEvent) => {
-      // No interferir con clics en controles ni en texto seleccionable de las tarjetas.
-      if ((event.target as Element).closest('a, button, input, textarea, select, label, .card'))
-        return;
+      // No interferir con clics en enlaces, botones o campos.
+      if ((event.target as Element).closest('a, button, input, textarea, select')) return;
+      const p = toLocal(event);
       if (reduceMotion.matches) return;
-      const p = { x: event.clientX, y: event.clientY };
       rings.push({ x: p.x, y: p.y, r: 4 });
       traces
         .map((trace) => ({ trace, dist: distanceToTrace(trace, p) }))
         .sort((a, b) => a.dist - b.dist)
-        .slice(0, 6)
+        .slice(0, 5)
         .forEach(({ trace }) => spawn(trace, p));
     };
-    const onTheme = () => {
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(host);
+    const intersection = new IntersectionObserver(([entry]) => {
+      visible = entry?.isIntersecting ?? true;
+      start();
+    });
+    intersection.observe(host);
+    // Cambios de tema: volver a leer los colores
+    const themeObserver = new MutationObserver(() => {
       palette = readPalette();
       draw();
-    };
-
-    const themeObserver = new MutationObserver(onTheme);
+    });
     themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['data-theme'],
     });
     const schemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const onScheme = () => {
+      palette = readPalette();
+      draw();
+    };
 
-    window.addEventListener('resize', resize);
-    window.addEventListener('pointermove', onMove);
-    document.documentElement.addEventListener('pointerleave', onLeave);
-    window.addEventListener('pointerdown', onDown);
+    host.addEventListener('pointermove', onMove);
+    host.addEventListener('pointerleave', onLeave);
+    host.addEventListener('pointerdown', onDown);
     document.addEventListener('visibilitychange', start);
     reduceMotion.addEventListener('change', start);
-    schemeQuery.addEventListener('change', onTheme);
+    schemeQuery.addEventListener('change', onScheme);
 
     resize();
     start();
 
     return () => {
       cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      intersection.disconnect();
       themeObserver.disconnect();
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('pointermove', onMove);
-      document.documentElement.removeEventListener('pointerleave', onLeave);
-      window.removeEventListener('pointerdown', onDown);
+      host.removeEventListener('pointermove', onMove);
+      host.removeEventListener('pointerleave', onLeave);
+      host.removeEventListener('pointerdown', onDown);
       document.removeEventListener('visibilitychange', start);
       reduceMotion.removeEventListener('change', start);
-      schemeQuery.removeEventListener('change', onTheme);
+      schemeQuery.removeEventListener('change', onScheme);
     };
   }, []);
 
